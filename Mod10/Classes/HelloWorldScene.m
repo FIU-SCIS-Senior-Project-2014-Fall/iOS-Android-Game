@@ -8,8 +8,8 @@
 // -----------------------------------------------------------------------
 
 #import "HelloWorldScene.h"
-#import "IntroScene.h"
-
+#import "Tile.h"
+#import "Board.h"
 // -----------------------------------------------------------------------
 #pragma mark - HelloWorldScene
 // -----------------------------------------------------------------------
@@ -17,6 +17,8 @@
 @implementation HelloWorldScene
 {
     CCSprite *_sprite;
+    Board *board;
+    CCLabelTTF *counterLabel;
 }
 
 // -----------------------------------------------------------------------
@@ -39,26 +41,46 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
     
-    // Create a colored background (Dark Grey)
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
-    [self addChild:background];
-    
-    // Add a sprite
-    _sprite = [CCSprite spriteWithImageNamed:@"Icon-72.png"];
-    _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
-    [self addChild:_sprite];
-    
-    // Animate sprite with action
-    CCActionRotateBy* actionSpin = [CCActionRotateBy actionWithDuration:1.5f angle:360];
-    [_sprite runAction:[CCActionRepeatForever actionWithAction:actionSpin]];
-    
-    // Create a back button
-    CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
-    backButton.positionType = CCPositionTypeNormalized;
-    backButton.position = ccp(0.85f, 0.95f); // Top Right of screen
-    [backButton setTarget:self selector:@selector(onBackClicked:)];
-    [self addChild:backButton];
+//    // Create a colored background (Dark Grey)
+//    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
+//    [self addChild:background];
+//    
+//    // Add a sprite
+//    _sprite = [CCSprite spriteWithImageNamed:@"Icon-72.png"];
+//    _sprite.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
+//    [self addChild:_sprite];
+//    
+//    // Animate sprite with action
+//    CCActionRotateBy* actionSpin = [CCActionRotateBy actionWithDuration:1.5f angle:360];
+//    [_sprite runAction:[CCActionRepeatForever actionWithAction:actionSpin]];
+//    
+//    // Create a back button
+//    CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+//    backButton.positionType = CCPositionTypeNormalized;
+//    backButton.position = ccp(0.85f, 0.95f); // Top Right of screen
+//    [backButton setTarget:self selector:@selector(onBackClicked:)];
+//    [self addChild:backButton];
 
+
+    
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"TileSpritesheet.plist"];
+    CCSpriteBatchNode * gameSpriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"TileSpritesheet.png"];
+    
+    [self addChild:gameSpriteBatchNode z:100];
+    
+    
+    board = [[Board alloc] initAtLocation:ccp(self.contentSize.width/2,self.contentSize.height/2) andSpritesheet:gameSpriteBatchNode];
+   [gameSpriteBatchNode addChild:board];
+
+    
+    counterLabel = [CCLabelTTF labelWithString:@"Counter: 0" fontName:@"Verdana-Bold" fontSize:24];
+    [counterLabel setColor:[CCColor colorWithCcColor3b:ccWHITE]];
+    
+    [self addChild:counterLabel z:1000];
+    
+    [counterLabel setPosition:ccp(self.contentSize.width*.7,self.contentSize.height*.9)];
+    
     // done
 	return self;
 }
@@ -101,11 +123,26 @@
     CGPoint touchLoc = [touch locationInNode:self];
     
     // Log touch location
-    CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
+    //CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
     
     // Move our sprite to touch location
-    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchLoc];
-    [_sprite runAction:actionMove];
+//    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchLoc];
+//    [_sprite runAction:actionMove];
+    [board findIndex:touchLoc];
+    [counterLabel setString:[NSString stringWithFormat:@"Counter: %i",board.curCounter%10]];
+}
+
+-(void) touchMoved:(UITouch *)touch withEvent:(UIEvent *)event{
+    
+    CGPoint touchLoc = [touch locationInNode:self];
+    [board findIndex:touchLoc];
+    [counterLabel setString:[NSString stringWithFormat:@"Counter: %i",board.curCounter%10]];
+    
+}
+
+-(void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
+    [board countTiles];
+    [counterLabel setString:[NSString stringWithFormat:@"Counter: %i",board.curCounter%10]];
 }
 
 // -----------------------------------------------------------------------
@@ -115,8 +152,8 @@
 - (void)onBackClicked:(id)sender
 {
     // back to intro scene with transition
-    [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+//    [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+//                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
 }
 
 // -----------------------------------------------------------------------

@@ -201,7 +201,10 @@
 		D2DCDBE3197D5BBA0090AC4C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDBE2197D5BBA0090AC4C /* main.m */; };
 		D2DCDBE7197D5BBA0090AC4C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDBE6197D5BBA0090AC4C /* AppDelegate.m */; };
 		D2DCDBEA197D5BBA0090AC4C /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDBE9197D5BBA0090AC4C /* HelloWorldScene.m */; };
-		D2DCDBED197D5BBA0090AC4C /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDBEC197D5BBA0090AC4C /* IntroScene.m */; };
+		D2DCDBFE197D64650090AC4C /* TileSpritesheet-iphone5hd.png in Resources */ = {isa = PBXBuildFile; fileRef = D2DCDBFC197D64650090AC4C /* TileSpritesheet-iphone5hd.png */; };
+		D2DCDBFF197D64650090AC4C /* TileSpritesheet-iphone5hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = D2DCDBFD197D64650090AC4C /* TileSpritesheet-iphone5hd.plist */; };
+		D2DCDC03197D72A40090AC4C /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDC02197D72A40090AC4C /* Tile.m */; };
+		D2DCDC06197D78050090AC4C /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDC05197D78050090AC4C /* Board.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -611,8 +614,12 @@
 		D2DCDBE6197D5BBA0090AC4C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
 		D2DCDBE8197D5BBA0090AC4C /* HelloWorldScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
 		D2DCDBE9197D5BBA0090AC4C /* HelloWorldScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HelloWorldScene.m; path = Classes/HelloWorldScene.m; sourceTree = "<group>"; };
-		D2DCDBEB197D5BBA0090AC4C /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
-		D2DCDBEC197D5BBA0090AC4C /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
+		D2DCDBFC197D64650090AC4C /* TileSpritesheet-iphone5hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TileSpritesheet-iphone5hd.png"; sourceTree = "<group>"; };
+		D2DCDBFD197D64650090AC4C /* TileSpritesheet-iphone5hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TileSpritesheet-iphone5hd.plist"; sourceTree = "<group>"; };
+		D2DCDC01197D72A40090AC4C /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tile.h; path = Classes/Tile.h; sourceTree = "<group>"; };
+		D2DCDC02197D72A40090AC4C /* Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tile.m; path = Classes/Tile.m; sourceTree = "<group>"; };
+		D2DCDC04197D78050090AC4C /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = Classes/Board.h; sourceTree = "<group>"; };
+		D2DCDC05197D78050090AC4C /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Board.m; path = Classes/Board.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -686,6 +693,7 @@
 		D2DCD986197D5BB40090AC4C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D2DCDBF6197D5F250090AC4C /* Images */,
 				D2DCD987197D5BB40090AC4C /* Default.png */,
 				D2DCD989197D5BB40090AC4C /* Default@2x.png */,
 				D2DCD98B197D5BB40090AC4C /* Default-568h@2x.png */,
@@ -1427,10 +1435,29 @@
 				D2DCDBE6197D5BBA0090AC4C /* AppDelegate.m */,
 				D2DCDBE8197D5BBA0090AC4C /* HelloWorldScene.h */,
 				D2DCDBE9197D5BBA0090AC4C /* HelloWorldScene.m */,
-				D2DCDBEB197D5BBA0090AC4C /* IntroScene.h */,
-				D2DCDBEC197D5BBA0090AC4C /* IntroScene.m */,
+				D2DCDC04197D78050090AC4C /* Board.h */,
+				D2DCDC05197D78050090AC4C /* Board.m */,
+				D2DCDC01197D72A40090AC4C /* Tile.h */,
+				D2DCDC02197D72A40090AC4C /* Tile.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		D2DCDBF6197D5F250090AC4C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D2DCDBF7197D5F2C0090AC4C /* iphone5hd */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		D2DCDBF7197D5F2C0090AC4C /* iphone5hd */ = {
+			isa = PBXGroup;
+			children = (
+				D2DCDBFC197D64650090AC4C /* TileSpritesheet-iphone5hd.png */,
+				D2DCDBFD197D64650090AC4C /* TileSpritesheet-iphone5hd.plist */,
+			);
+			name = iphone5hd;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1501,6 +1528,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2DCDBFF197D64650090AC4C /* TileSpritesheet-iphone5hd.plist in Resources */,
 				D2DCD98A197D5BB40090AC4C /* Default@2x.png in Resources */,
 				D2DCD99D197D5BB40090AC4C /* Icon-120.png in Resources */,
 				D2DCD993197D5BB40090AC4C /* Icon@2x.png in Resources */,
@@ -1514,6 +1542,7 @@
 				D2DCD9A1197D5BB40090AC4C /* Icon-Small-50.png in Resources */,
 				D2DCDBDF197D5BBA0090AC4C /* LICENSE_Chipmunk.txt in Resources */,
 				D2DCD995197D5BB40090AC4C /* Icon-72.png in Resources */,
+				D2DCDBFE197D64650090AC4C /* TileSpritesheet-iphone5hd.png in Resources */,
 				D2DCDB71197D5BB90090AC4C /* LICENSE_CCBReader.txt in Resources */,
 				D2DCDAE1197D5BB70090AC4C /* LICENSE_cocos2d.txt in Resources */,
 				D2DCD98C197D5BB40090AC4C /* Default-568h@2x.png in Resources */,
@@ -1591,11 +1620,13 @@
 				D2DCD9F3197D5BB50090AC4C /* CCActionManager.m in Sources */,
 				D2DCDA55197D5BB60090AC4C /* CCProgressNode.m in Sources */,
 				D2DCDA61197D5BB60090AC4C /* CCResponderManager.m in Sources */,
+				D2DCDC03197D72A40090AC4C /* Tile.m in Sources */,
 				D2DCDA93197D5BB60090AC4C /* CCTransition.m in Sources */,
 				D2DCDAEA197D5BB70090AC4C /* OALActionManager.m in Sources */,
 				D2DCDA4E197D5BB60090AC4C /* CCPhysicsNode.m in Sources */,
 				D2DCDAF0197D5BB70090AC4C /* OALUtilityActions.m in Sources */,
 				D2DCDA28197D5BB50090AC4C /* CCMotionStreak.m in Sources */,
+				D2DCDC06197D78050090AC4C /* Board.m in Sources */,
 				D2DCDB32197D5BB80090AC4C /* NSMutableArray+WeakReferences.m in Sources */,
 				D2DCDB20197D5BB80090AC4C /* OpenALManager.m in Sources */,
 				D2DCDA90197D5BB60090AC4C /* CCTMXXMLParser.m in Sources */,
@@ -1660,7 +1691,6 @@
 				D2DCDA38197D5BB50090AC4C /* CCParticleBatchNode.m in Sources */,
 				D2DCDAD2197D5BB70090AC4C /* NSAttributedString+CCAdditions.m in Sources */,
 				D2DCDBE3197D5BBA0090AC4C /* main.m in Sources */,
-				D2DCDBED197D5BBA0090AC4C /* IntroScene.m in Sources */,
 				D2DCD9D0197D5BB40090AC4C /* CCEffectStack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
