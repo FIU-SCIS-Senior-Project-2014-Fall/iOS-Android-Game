@@ -9,6 +9,7 @@
 
 #import "AppDelegate.h"
 #import "HelloWorldScene.h"
+#import "GameManager.h"
 
 @implementation AppDelegate
 
@@ -41,6 +42,7 @@
 		// Make iPad's act like they run at a 2x content scale. (iPad retina 4x)
 //		CCSetupTabletScale2X: @(YES),
 	}];
+    [GameManager sharedGameManager];
 	
 	return YES;
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2696D4B1984349E00D1E06E /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2696D4A1984349E00D1E06E /* GameManager.m */; };
+		D2696D57198444C300D1E06E /* GCDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D2696D56198444C300D1E06E /* GCDatabase.m */; };
+		D2696D5A1984454100D1E06E /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = D2696D591984454100D1E06E /* GameState.m */; };
 		D2DCD96C197D5BB40090AC4C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DCD96B197D5BB40090AC4C /* QuartzCore.framework */; };
 		D2DCD96E197D5BB40090AC4C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DCD96D197D5BB40090AC4C /* OpenGLES.framework */; };
 		D2DCD970197D5BB40090AC4C /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DCD96F197D5BB40090AC4C /* OpenAL.framework */; };
@@ -218,6 +221,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D2696D491984349E00D1E06E /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameManager.h; path = Classes/GameManager.h; sourceTree = "<group>"; };
+		D2696D4A1984349E00D1E06E /* GameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameManager.m; path = Classes/GameManager.m; sourceTree = "<group>"; };
+		D2696D4C1984384C00D1E06E /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Classes/Constants.h; sourceTree = "<group>"; };
+		D2696D55198444C300D1E06E /* GCDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDatabase.h; path = Classes/GCDatabase.h; sourceTree = "<group>"; };
+		D2696D56198444C300D1E06E /* GCDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDatabase.m; path = Classes/GCDatabase.m; sourceTree = "<group>"; };
+		D2696D581984454100D1E06E /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameState.h; path = Classes/GameState.h; sourceTree = "<group>"; };
+		D2696D591984454100D1E06E /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameState.m; path = Classes/GameState.m; sourceTree = "<group>"; };
 		D2DCD968197D5BB40090AC4C /* Mod10.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mod10.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2DCD96B197D5BB40090AC4C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D2DCD96D197D5BB40090AC4C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1439,6 +1449,13 @@
 				D2DCDC05197D78050090AC4C /* Board.m */,
 				D2DCDC01197D72A40090AC4C /* Tile.h */,
 				D2DCDC02197D72A40090AC4C /* Tile.m */,
+				D2696D491984349E00D1E06E /* GameManager.h */,
+				D2696D4A1984349E00D1E06E /* GameManager.m */,
+				D2696D4C1984384C00D1E06E /* Constants.h */,
+				D2696D581984454100D1E06E /* GameState.h */,
+				D2696D591984454100D1E06E /* GameState.m */,
+				D2696D55198444C300D1E06E /* GCDatabase.h */,
+				D2696D56198444C300D1E06E /* GCDatabase.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1631,6 +1648,7 @@
 				D2DCDB20197D5BB80090AC4C /* OpenALManager.m in Sources */,
 				D2DCDA90197D5BB60090AC4C /* CCTMXXMLParser.m in Sources */,
 				D2DCDAC5197D5BB70090AC4C /* CCProfiling.m in Sources */,
+				D2696D5A1984454100D1E06E /* GameState.m in Sources */,
 				D2DCDB27197D5BB80090AC4C /* OALSuspendHandler.m in Sources */,
 				D2DCDB55197D5BB90090AC4C /* CCTextField.m in Sources */,
 				D2DCDA2D197D5BB50090AC4C /* CCNode.m in Sources */,
@@ -1642,6 +1660,7 @@
 				D2DCD9CC197D5BB40090AC4C /* CCEffectPixellate.m in Sources */,
 				D2DCDB6A197D5BB90090AC4C /* CCBSequenceProperty.m in Sources */,
 				D2DCDA1A197D5BB50090AC4C /* CCLabelTTF.m in Sources */,
+				D2696D57198444C300D1E06E /* GCDatabase.m in Sources */,
 				D2DCDB19197D5BB80090AC4C /* ALSource.m in Sources */,
 				D2DCDB3C197D5BB80090AC4C /* OALTools.m in Sources */,
 				D2DCDA97197D5BB60090AC4C /* cocos2d.m in Sources */,
@@ -1685,6 +1704,7 @@
 				D2DCD9DB197D5BB40090AC4C /* CCShader.m in Sources */,
 				D2DCD9FD197D5BB50090AC4C /* CCAnimation.m in Sources */,
 				D2DCDB49197D5BB80090AC4C /* CCControlTextureFactory.m in Sources */,
+				D2696D4B1984349E00D1E06E /* GameManager.m in Sources */,
 				D2DCDAED197D5BB70090AC4C /* OALAudioActions.m in Sources */,
 				D2DCDBE7197D5BBA0090AC4C /* AppDelegate.m in Sources */,
 				D2DCDA9E197D5BB60090AC4C /* CCDirectorIOS.m in Sources */,
@@ -1889,6 +1909,7 @@
 				D2DCDBF2197D5BBA0090AC4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D2DCDBF3197D5BBA0090AC4C /* Build configuration list for PBXNativeTarget "Mod10" */ = {
 			isa = XCConfigurationList;
@@ -1897,6 +1918,7 @@
 				D2DCDBF5197D5BBA0090AC4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

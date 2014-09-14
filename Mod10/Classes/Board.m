@@ -7,10 +7,7 @@
 //
 
 #import "Board.h"
-#define TILE_SIZE 64
-#define ROWS 5
-#define COLUMNS 5
-#define LOW_BOUND 100
+#define TILE_SIZE 60
 #define SPAWNHEIGHT 1200 //height the tiles should appear when they are created
 
 
@@ -34,25 +31,23 @@
     BOOL fillingBoard;
     int curIndex;
     int stack[25], stackPtr;
+    int LOW_BOUND;
+    int LEFT_BOUND;
+}
 
-}
-- (NSInteger)getRandomNumberBetween:(NSInteger)min maxNumber:(NSInteger)max
-{
-    return min + arc4random() % (max - min + 1);
-}
 
 /**
  Determines the y coordinate for a particular row
  */
 -(float) getYForRow:(int)row{
-    return LOW_BOUND+TILE_SIZE/2 + (TILE_SIZE * row);
+    return LOW_BOUND + TILE_SIZE/2 + (TILE_SIZE * row);
 }
 
 /**
  Determines the x coordinate for a particular column
  */
 -(float) getXForColumn:(int)column{
-    return TILE_SIZE/2 + (TILE_SIZE * column);
+    return LEFT_BOUND + TILE_SIZE/2 + (TILE_SIZE * column);
 }
 
 
@@ -82,12 +77,9 @@
  */
 -(void) createTileAtColumn:(int)column andIndex:(int)index{
     
-    
-    int randomNum = (int) [self getRandomNumberBetween:1 maxNumber:9];
-    
-    Tile * newTile = [[Tile alloc] initAtLocation:ccp([self getXForColumn:column],SPAWNHEIGHT * (1+(index-column)%COLUMNS)) withIndex:index andValue:randomNum];
+    Tile * newTile = [[Tile alloc] initAtLocation:ccp([self getXForColumn:column],SPAWNHEIGHT)  withIndex:index];
     tiles[index] = newTile;
-    [spritesheet addChild:newTile];
+    [spritesheet addChild:newTile z: 0];
     
 }
 
@@ -109,7 +101,7 @@ Look for non-empty tiles and send them down. When you
         if (!tiles[index]){
             for (int k = j; k< ROWS; k++){
                 if (tiles[column + (k*(COLUMNS))]){
-                    CCLOG(@"A goto: %i",index);
+                    CCLOG(@"A:: Val %i goto index: %i",tiles[column + (k*(COLUMNS))].value,index);
 
                     
                     tiles[index] = tiles[column + (k*(COLUMNS))];
@@ -169,19 +161,21 @@ Look for non-empty tiles and send them down. When you
  */
 -(int) findColumn:(float)x{
     
-    if ( x <= TILE_SIZE*1){
+    float startPoint = LEFT_BOUND;
+    
+    if ( x > startPoint &&  x <= startPoint + TILE_SIZE*1){
         return 0;
     }
-    else if (x > TILE_SIZE*1 && x <= TILE_SIZE*2){
+    else if (x > startPoint + TILE_SIZE*1 && x <= startPoint + TILE_SIZE*2){
         return 1;
     }
-    else if (x > TILE_SIZE*2 && x <= TILE_SIZE*3){
+    else if (x > startPoint + TILE_SIZE*2 && x <= startPoint + TILE_SIZE*3){
         return 2;
     }
-    else if (x > TILE_SIZE*3 && x <= TILE_SIZE*4){
+    else if (x > startPoint + TILE_SIZE*3 && x <= startPoint + TILE_SIZE*4){
         return 3;
     }
-    else if (x > TILE_SIZE*4 && x <= TILE_SIZE*5){
+    else if (x > startPoint + TILE_SIZE*4 && x <= startPoint + TILE_SIZE*5){
         return 4;
     }
     return -1;
@@ -216,7 +210,9 @@ Look for non-empty tiles and send them down. When you
 }
 
 
-
+/**
+ Sanity check for rows, cols, and index
+ */
 -(BOOL) validateRows:(int) row columns:(int)column andIndex:(int)index{
     
     BOOL rowsCheck = row >= 0 && row < ROWS;
@@ -267,10 +263,12 @@ Look for non-empty tiles and send them down. When you
                 
             }
             else{
-                CCLOG(@"PUSH");
-                self.curCounter = (self.curCounter + [tiles[index] touchTileAndGetValue]);
-                curIndex = index;
-                [self pushIndex:index];
+                if (!tiles[index].isTouched){
+                    CCLOG(@"PUSH");
+                    self.curCounter = (self.curCounter + [tiles[index] touchTileAndGetValue]);
+                    curIndex = index;
+                    [self pushIndex:index];
+                }
                 
             }
             
@@ -289,11 +287,16 @@ Look for non-empty tiles and send them down. When you
 -(void) countTiles{
     
     CCLOG(@"self.curCounter: %i", self.curCounter);
-    if (self.curCounter%10 == 0 ){
+    if (self.curCounter != 0 && self.curCounter%10 == 0 ){
+        
+        self.movesLeft -= 1;
+        
+        self.score += (stackPtr*(self.curCounter/10));
+        
         int i = [self popIndex];
         while (i != -1) {
             CCLOG(@"INDEX TO BE REMOVED: %i",i);
-            [tiles[i] removeFromParentAndCleanup:TRUE];
+            [tiles[i] deleteTile];
             tiles[i] = NULL;
             i = [self popIndex];
         }
@@ -315,21 +318,40 @@ Look for non-empty tiles and send them down. When you
     stackPtr = -1;
     
 }
+-(void) newGame {
+    self.score = 0;
+    self.timeLeft = MAX_TIME;
+    self.movesLeft = MAX_MOVES;
+    
+    fillingBoard = false;
 
+    curIndex = -1;
+    stackPtr = -1;
+    for (int i = 0; i < 25; i++)
+        stack[i] = -1;
+    
+    [self fillBoard];
+}
 -(id) initAtLocation:(CGPoint)location andSpritesheet:(CCSpriteBatchNode*)s
 {
     if( (self=[super init]) )
     {
         spritesheet = s;
+        
         self.position=location;
-        fillingBoard = false;
-        curIndex = -1;
-        stackPtr = -1;
+
+        [self setSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"Frame.png"]];
         
-        for (int i = 0; i < 25; i++)
-            stack[i] = -1;
+        float edgeBuff = (self.contentSize.width - (5*TILE_SIZE))/2;
         
-        [self fillBoard];
+        LOW_BOUND = (self.position.y - (self.contentSize.height*0.5)) + edgeBuff;
+        LEFT_BOUND = self.position.x - (self.contentSize.width*0.5) + edgeBuff;
+        
+        
+
+        
+        [self newGame];
+
         
     }
     return self;

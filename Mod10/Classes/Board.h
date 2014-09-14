@@ -8,9 +8,17 @@
 
 #import "cocos2d.h"
 #import "Tile.h"
+#import "Constants.h"
+
 @interface Board : CCSprite
 
 @property (nonatomic,readwrite) int curCounter;
+@property (nonatomic, readwrite) int score;
+@property (nonatomic, readwrite) int movesLeft;
+@property (nonatomic, readwrite) int timeLeft;
+//@property (nonatomic, readwrite) int MAX_TIME;
+//@property (nonatomic, readwrite) int MAX_MOVES;
+
 
 -(id) initAtLocation:(CGPoint)location andSpritesheet:(CCSpriteBatchNode*)s;
 -(void) findIndex:(CGPoint)pt;

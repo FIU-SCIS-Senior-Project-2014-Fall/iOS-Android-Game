@@ -9,26 +9,31 @@
 #import "Tile.h"
 
 #define SCREEN_WIDTH 640
-#define SPEED_FACTOR 1000
+#define SPEED_FACTOR 10
 
 @implementation Tile{
    int adjacents[4]; //top, bottom, right, left
+    int zValues[25];
+}
+
+- (int)getRandomNumberBetween:(int)min maxNumber:(int)max
+{
+    return min + arc4random() % (max - min + 1);
 }
 
 -(int) touchTileAndGetValue{
 
-    if ([self numberOfRunningActions] == 0){
-    CCActionScaleTo * scaleUp = [CCActionScaleTo actionWithDuration:0.1 scale:1.2];
-    CCActionScaleTo * scaleDown = [CCActionScaleTo actionWithDuration:0.2 scale:1.1];
-    CCActionSequence *sequence = [CCActionSequence actionOne:scaleUp two:scaleDown];
-    [self runAction:sequence];
-    }
+    
+    [self setSpriteFrame:[CCSpriteFrame frameWithImageNamed:[NSString stringWithFormat:@"Tile%i-touched.png",self.value]]];
+    
+
+    [self setIsTouched:true];
     return self.value;
 }
 
 -(int) releaseTileAndGetValue{
-    [self stopAllActions];
-    self.scale = 1.0;
+    [self setSpriteFrame:[CCSpriteFrame frameWithImageNamed:[NSString stringWithFormat:@"Tile%i.png",self.value]]];
+    [self setIsTouched: false ];
     return self.value;
 }
 
@@ -62,49 +67,86 @@
 }
 -(void) moveTo:(CGPoint)destination{
     
-    if (self.isLocked)
-        return;
+
+    
+//    if (self.isLocked)
+//        return;
     
     [self setAdjacents];
     
-    float distance = ccpDistanceSQ(destination, self.position);
     
-    //try to give a uniform speed for all times
-    float time = distance/(SCREEN_WIDTH*SPEED_FACTOR);
-    if (time < 0.1)
+    CCLOG(@"DEST %f POS %f", destination.y, self.position.y);
+    float distance = ccpDistance(destination, self.position);
+
+    
+    
+    float time = (SCREEN_WIDTH / distance) * 0.5 ;
+        
+    if (time < 0.1 || distance < SCREEN_WIDTH)
         time = 0.1; //Make sure that it's not too fast so it doesnt teleport
     
+    
     self.isLocked = true;
+    
+    CCLOG(@"MoveTo: VALUE: %i INDEX: %i with time: %f distance %f",self.value, self.index, time,distance);
+    
+    [self setZOrder:  zValues[self.index]];
     
     CCActionMoveTo *actionMove = [CCActionSequence actionOne:[CCActionMoveTo actionWithDuration:time position:destination] two: [CCActionCallFunc actionWithTarget:self selector:@selector(lockTile)]];
     
     [self runAction:actionMove];
 
 }
+
 -(void) setTileNumber{
     
+    self.value = [self getRandomNumberBetween:1 maxNumber:9];
+    
     if (self.value >= 0 && self.value <10){
+    
         [self setSpriteFrame:[CCSpriteFrame frameWithImageNamed:[NSString stringWithFormat:@"Tile%i.png",self.value]]];
     }
     else{
         CCLOG(@"ERROR, no such tile found");
     }
 }
+- (void) deleteTile{
+    CCActionScaleTo * scale = [CCActionScaleTo actionWithDuration:0.10 scale:0];
 
--(id) initAtLocation:(CGPoint)location withIndex:(int)i andValue:(int)val
+    CCActionMoveTo *move = [CCActionMoveTo actionWithDuration:.5 position:ccp(self.position.x  - 1000,self.position.y)];
+    CCActionSequence *sequence = [CCActionSequence actionOne:scale two:[CCActionCallFunc actionWithTarget:self selector:@selector(removeFromParent)]];
+    
+    
+    [self runAction:sequence];
+    
+    //[self removeFromParentAndCleanup:TRUE];
+}
+-(id) initAtLocation:(CGPoint)location withIndex:(int)i
 {
     if( (self=[super init]) )
     {
-        self.value = val;
+
         self.index = i;
         self.isLocked = false;
+        self.isTouched = false;
+        
         [self setTileNumber ];
+        
         CCLOG(@"INITVAL: %i, INDEX: %i",self.value, self.index);
         self.position=location;
 
         for (int i = 0; i < 4; i++)
             adjacents[i] = -1;
+        
+        //int zValues [25] = {20,21,22,23,24,15,16,17,18,19,10,11,12,13,14,5,6,7,8,9,0,1,2,3,4};
 
+        int k = 0;
+        for (int j = 20; j >= 0; j-=5)
+            for (int i = 0; i < 5; i ++){
+                zValues[k++] = j + i;
+            }
+
+        
     }
     return self;
 }
