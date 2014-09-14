@@ -1,0 +1,37 @@
+dependencies: \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/CCAppDelegate.m \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../ccMacros.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../ccConfig.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Support/CGPointExtension.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/CCAppDelegate.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/CCDirectorIOS.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCDirector.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../ccTypes.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../Platforms/CCGL.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../Platforms/iOS/CCGLView.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/CCESRenderer.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCProtocols.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Support/CCColor.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCResponderManager.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCRenderer.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/CCTexture.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../Platforms/CCNS.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Support/CCFileUtils.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/CCDirector_Private.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/CCScheduler.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OALSimpleAudio.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/Support/SynthesizeSingleton.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALDevice.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALContext.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALListener.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALTypes.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/Session/OALSuspendHandler.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALSource.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALSoundSource.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALBuffer.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/Actions/OALAction.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/ObjectALConfig.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALChannelSource.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALSoundSourcePool.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/AudioTrack/OALAudioTrack.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/AudioTrack/OALAudioTrackNotifications.h

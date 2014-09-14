@@ -1,0 +1,36 @@
+dependencies: \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/CCActionInstant.m \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/CCActionInstant.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/CCAction.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/ccTypes.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/ccMacros.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/ccConfig.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/Support/CGPointExtension.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/Platforms/CCGL.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/CCGLView.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/CCESRenderer.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/CCSpriteFrame.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/CCNode.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/CCProtocols.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/Support/CCColor.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/CCResponder.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/CCResponderManager.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/CCScheduler.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/CCRenderer.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/cocos2d/CCSprite.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/OALSimpleAudio.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/Support/SynthesizeSingleton.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALDevice.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALContext.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALListener.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALTypes.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/Session/OALSuspendHandler.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALSource.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALSoundSource.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALBuffer.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/Actions/OALAction.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/ObjectALConfig.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALChannelSource.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALSoundSourcePool.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/AudioTrack/OALAudioTrack.h \
+  /Users/lorenzocastillo/Dropbox/Mod10/Mod10/Libraries/ObjectAL/AudioTrack/OALAudioTrackNotifications.h

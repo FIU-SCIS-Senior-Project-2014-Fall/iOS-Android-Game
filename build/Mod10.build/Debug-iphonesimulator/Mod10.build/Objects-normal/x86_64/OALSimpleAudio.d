@@ -1,0 +1,23 @@
+dependencies: \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OALSimpleAudio.m \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OALSimpleAudio.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/Support/SynthesizeSingleton.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALDevice.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALContext.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALListener.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALTypes.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/Session/OALSuspendHandler.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALSource.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALSoundSource.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALBuffer.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/Actions/OALAction.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/ObjectALConfig.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALChannelSource.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/ALSoundSourcePool.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/AudioTrack/OALAudioTrack.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/AudioTrack/OALAudioTrackNotifications.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/Support/ObjectALMacros.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/Support/OALTools.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/Support/ARCSafe_MemMgmt.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/Session/OALAudioSession.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/ObjectAL/OpenAL/OpenALManager.h

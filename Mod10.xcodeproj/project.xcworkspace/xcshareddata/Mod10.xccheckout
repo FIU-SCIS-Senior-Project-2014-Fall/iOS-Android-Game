@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E2EA2F55-695F-4249-B221-91BC27A506A9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Mod10</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1E940E405EBDF44A25C8C254492C4D1E3BC1B771</key>
+		<string>https://github.com/FIU-SCIS-Senior-Project-2014-Fall/iOS-Android-Game.git</string>
+		<key>80158AE9A542B1BBDC0B61BADCF8B8F6A916E3DA</key>
+		<string>https://github.com/FIU-SCIS-Senior-Project-2014-Fall/iOS-Android-Game.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Mod10.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1E940E405EBDF44A25C8C254492C4D1E3BC1B771</key>
+		<string>../..</string>
+		<key>80158AE9A542B1BBDC0B61BADCF8B8F6A916E3DA</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/FIU-SCIS-Senior-Project-2014-Fall/iOS-Android-Game.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1E940E405EBDF44A25C8C254492C4D1E3BC1B771</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>80158AE9A542B1BBDC0B61BADCF8B8F6A916E3DA</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1E940E405EBDF44A25C8C254492C4D1E3BC1B771</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Mod10</string>
+		</dict>
+	</array>
+</dict>
+</plist>

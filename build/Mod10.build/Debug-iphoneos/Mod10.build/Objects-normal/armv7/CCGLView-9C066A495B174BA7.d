@@ -1,0 +1,21 @@
+dependencies: \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/CCGLView.m \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../ccMacros.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../ccConfig.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Support/CGPointExtension.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/CCGLView.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/CCESRenderer.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/CCES2Renderer.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCDirector.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../ccTypes.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../Platforms/CCGL.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCProtocols.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Support/CCColor.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCResponderManager.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCRenderer.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCConfiguration.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/CCScene.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCNode.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCResponder.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/Platforms/iOS/../../CCScheduler.h \
+  /Users/lorenzocastillo/Documents/Developer_Castle/Mod10/Mod10/Libraries/cocos2d/CCDirector_Private.h
