@@ -191,6 +191,17 @@
 		D26C8B2519C5EAD400B9931E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D26C8B2419C5EAD400B9931E /* AppDelegate.m */; };
 		D26C8B2819C5EAD400B9931E /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D26C8B2719C5EAD400B9931E /* HelloWorldScene.m */; };
 		D26C8B2B19C5EAD400B9931E /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D26C8B2A19C5EAD400B9931E /* IntroScene.m */; };
+		D2F4D30719C5EFF60037D55A /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D30519C5EFF60037D55A /* OpenAL.framework */; };
+		D2F4D30A19C5EFFE0037D55A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D30919C5EFFE0037D55A /* UIKit.framework */; };
+		D2F4D30C19C5F0050037D55A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D30B19C5F0050037D55A /* QuartzCore.framework */; };
+		D2F4D30E19C5F00D0037D55A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D30D19C5F00D0037D55A /* AVFoundation.framework */; };
+		D2F4D31019C5F0130037D55A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D30F19C5F0130037D55A /* CoreGraphics.framework */; };
+		D2F4D31219C5F01A0037D55A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D31119C5F01A0037D55A /* CoreText.framework */; };
+		D2F4D31A19C5F0750037D55A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D31719C5F0370037D55A /* AudioToolbox.framework */; };
+		D2F4D31B19C5F0750037D55A /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D31519C5F0310037D55A /* GLKit.framework */; };
+		D2F4D31C19C5F0750037D55A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D31319C5F02B0037D55A /* Foundation.framework */; };
+		D2F4D31D19C5F0750037D55A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D30619C5EFF60037D55A /* OpenGLES.framework */; };
+		D2F4D31E19C5F0CC0037D55A /* libObjectiveChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D26C88C219C5EACF00B9931E /* libObjectiveChipmunk.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -582,6 +593,16 @@
 		D26C8B2719C5EAD400B9931E /* HelloWorldScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HelloWorldScene.m; path = Classes/HelloWorldScene.m; sourceTree = "<group>"; };
 		D26C8B2919C5EAD400B9931E /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		D26C8B2A19C5EAD400B9931E /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
+		D2F4D30519C5EFF60037D55A /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		D2F4D30619C5EFF60037D55A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		D2F4D30919C5EFFE0037D55A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D2F4D30B19C5F0050037D55A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D2F4D30D19C5F00D0037D55A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D2F4D30F19C5F0130037D55A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D2F4D31119C5F01A0037D55A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		D2F4D31319C5F02B0037D55A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D2F4D31519C5F0310037D55A /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		D2F4D31719C5F0370037D55A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -589,6 +610,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2F4D31E19C5F0CC0037D55A /* libObjectiveChipmunk.a in Frameworks */,
+				D2F4D31A19C5F0750037D55A /* AudioToolbox.framework in Frameworks */,
+				D2F4D31B19C5F0750037D55A /* GLKit.framework in Frameworks */,
+				D2F4D31C19C5F0750037D55A /* Foundation.framework in Frameworks */,
+				D2F4D31219C5F01A0037D55A /* CoreText.framework in Frameworks */,
+				D2F4D31019C5F0130037D55A /* CoreGraphics.framework in Frameworks */,
+				D2F4D30E19C5F00D0037D55A /* AVFoundation.framework in Frameworks */,
+				D2F4D30C19C5F0050037D55A /* QuartzCore.framework in Frameworks */,
+				D2F4D30A19C5EFFE0037D55A /* UIKit.framework in Frameworks */,
+				D2F4D30719C5EFF60037D55A /* OpenAL.framework in Frameworks */,
+				D2F4D31D19C5F0750037D55A /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,6 +693,7 @@
 		D26C88ED19C5EACF00B9931E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				D2F4D31919C5F0520037D55A /* Frameworks */,
 				D26C8A1E19C5EAD200B9931E /* LICENSE_cocos2d.txt */,
 				D26C8AAE19C5EAD300B9931E /* LICENSE_CCBReader.txt */,
 				D26C8B1C19C5EAD400B9931E /* LICENSE_Chipmunk.txt */,
@@ -1373,6 +1406,24 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		D2F4D31919C5F0520037D55A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D2F4D31719C5F0370037D55A /* AudioToolbox.framework */,
+				D2F4D31519C5F0310037D55A /* GLKit.framework */,
+				D2F4D31319C5F02B0037D55A /* Foundation.framework */,
+				D2F4D31119C5F01A0037D55A /* CoreText.framework */,
+				D2F4D30F19C5F0130037D55A /* CoreGraphics.framework */,
+				D2F4D30D19C5F00D0037D55A /* AVFoundation.framework */,
+				D2F4D30B19C5F0050037D55A /* QuartzCore.framework */,
+				D2F4D30919C5EFFE0037D55A /* UIKit.framework */,
+				D2F4D30519C5EFF60037D55A /* OpenAL.framework */,
+				D2F4D30619C5EFF60037D55A /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			path = ..;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1711,6 +1762,10 @@
 					"\"$(SRCROOT)/$(PROJECT_NAME)/Libraries/Chipmunk/objectivec/include\"",
 				);
 				INFOPLIST_FILE = Mod10/Resources/Info.plist;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-objC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1729,6 +1784,10 @@
 					"\"$(SRCROOT)/$(PROJECT_NAME)/Libraries/Chipmunk/objectivec/include\"",
 				);
 				INFOPLIST_FILE = Mod10/Resources/Info.plist;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-objC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1787,6 +1846,7 @@
 				D26C8B3019C5EAD400B9931E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D26C8B3119C5EAD400B9931E /* Build configuration list for PBXNativeTarget "ObjectiveChipmunk" */ = {
 			isa = XCConfigurationList;
@@ -1795,6 +1855,7 @@
 				D26C8B3319C5EAD400B9931E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
