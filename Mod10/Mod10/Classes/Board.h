@@ -23,4 +23,6 @@
 -(id) initAtLocation:(CGPoint)location andSpritesheet:(CCSpriteBatchNode*)s;
 -(void) findIndex:(CGPoint)pt;
 -(void) countTiles;
+-(void)cleanUpBoard;
+-(void) newGame;
 @end

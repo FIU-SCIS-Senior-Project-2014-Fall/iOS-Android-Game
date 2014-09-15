@@ -10,8 +10,8 @@
 #define Mod10_Constants_h
 
 
-#define MAX_MOVES 20
-#define MAX_TIME 10
+#define MAX_MOVES 1
+#define MAX_TIME 60
 #define ROWS 5
 #define COLUMNS 5
 
@@ -20,5 +20,12 @@ typedef enum {
     kTimedMode,
     kMovesMode
 } GameModes;
+
+typedef enum {
+    kChangingScenes,
+    kGameOverScene,
+    kMenuScene,
+    kGameLayerScene
+} SceneStates;
 
 #endif

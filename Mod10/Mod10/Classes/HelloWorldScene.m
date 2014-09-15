@@ -18,24 +18,23 @@
 
 @implementation HelloWorldScene
 {
-    CCSprite *_sprite;
+    CCSprite *highScore;
     Board *board;
-    CCLabelTTF *counterLabel, *scoreLabel, *timeLabel,*moveLabel;
+    CCLabelTTF *counterLabel, *scoreLabel, *timeLabel,*moveLabel, *gameoverLabel;
     CCSpriteBatchNode * gameSpriteBatchNode;
     BOOL isGameOver;
     CCProgressNode * clock;
+    SceneStates sceneState;
+    CCProgressNode *gameoverMeter;
+    int tempScore;
 }
-
-// -----------------------------------------------------------------------
-#pragma mark - Create & Destroy
-// -----------------------------------------------------------------------
 
 + (HelloWorldScene *)scene
 {
+
     return [[self alloc] init];
 }
 
-// -----------------------------------------------------------------------
 
 -(void) countdown{
     CCLOG(@"Countdown %i",board.timeLeft);
@@ -66,18 +65,70 @@
         isGameOver = true;
         
         CCLOG(@"GameOver");
-        [self unscheduleAllSelectors];
-        [[GameManager sharedGameManager] updateHighScore:[board score]];
+        //[self unscheduleAllSelectors];
+
         
     }
 }
 
+- (void) countScore{
+    
+    if ([board score] == 0) {
+        [self unschedule:@selector(countScore)];
+        return;
+    }
+    
+    [gameoverLabel setString:[NSString stringWithFormat:@"%i",++tempScore]];
+    
+    int bestScore = [[GameManager sharedGameManager] updateHighScore:0];
+    if (bestScore < 1)
+        bestScore = 1;
+    
+    [gameoverMeter setPercentage:((float)tempScore/bestScore) * 100];
+    
+    if (tempScore > [[GameManager sharedGameManager] highScoreMoves]){
+        CCLOG(@"YOU GOT A HIGH SCORE!!");
+        [highScore setVisible:true];
+
+    }
+    
+    if (tempScore == [board score]){
+        CCLOG(@"UNSCHED COUNTSCORE");
+        [[GameManager sharedGameManager] updateHighScore:[board score]];
+        [self unschedule:@selector(countScore)];
+        tempScore = 0;
+        
+    }
+    
+}
+- (void) handleGameOver{
+    CCLOG(@"HANDLING GAME OVER");
+    sceneState = kGameOverScene;
+    isGameOver = false;
+    
+    [board cleanUpBoard];
+    
+    [gameoverLabel setString:@"0"];
+    
+    tempScore = 0;
+    
+    [self schedule:@selector(countScore) interval:0.05];
+    
+
+}
 -(void) update:(CCTime)delta {
     
-    if (isGameOver)
+    if (isGameOver && sceneState != kChangingScenes){
+        CCLOG(@"Game OVer");
+        sceneState = kChangingScenes;
+        CCActionSequence *sequence = [CCActionSequence actions:[CCActionDelay actionWithDuration:0.5],[CCActionMoveTo actionWithDuration:0.25 position:ccp(-self.contentSize.width,self.position.y)],[CCActionCallFunc actionWithTarget:self selector:@selector(handleGameOver)], nil];
+        [self runAction:sequence];
         return;
-    [self updateHUD];
-    [self checkGameOver];
+    }
+    else if (sceneState == kGameLayerScene){
+        [self updateHUD];
+        [self checkGameOver];
+    }
 }
 
 -(void) setupHUD{
@@ -99,7 +150,6 @@
     scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Verdana-Bold" fontSize:48];
     [scoreLabel setColor:[CCColor colorWithCcColor3b:ccc3(241, 198, 19)]];
     [self addChild:scoreLabel z:1000];
-    //scoreLabel.anchorPoint = ccp(scoreLabel.anchorPoint.x,0);
     [scoreLabel setPosition:ccp(pos.x,pos.y + HUD.contentSize.height*0.1)];
     
     if ([[GameManager sharedGameManager] curMode] == kTimedMode){
@@ -120,41 +170,107 @@
     }
     
 }
+- (void) startGame{
+    sceneState = kGameLayerScene;
+    [board newGame];
+    [highScore setVisible:false];
+    [gameoverMeter setPercentage:0];
+    [gameoverLabel setString:@"0"];
+}
+- (void) playAgainButton:(id)sender{
+    CCLOG(@"PLAY AGAIN");
+    if (sceneState == kChangingScenes)
+        return;
+    
+    [board setScore:0];
+    [scoreLabel setString:@"0"];
+    
+    sceneState = kChangingScenes;
+    
+    CCActionSequence *sequence = [CCActionSequence actions:[CCActionMoveTo actionWithDuration:0.25 position:ccp(0,self.position.y)],[CCActionCallFunc actionWithTarget:self selector:@selector(startGame)], nil];
+    [self runAction:sequence];
+    [self setupGameLayer];
+
+    
+    
+
+}
+- (void) menuButton:(id)sender{
+    CCLOG(@"MENU BUTTON");
+    
+}
+- (void) setupGameOver{
+    
+    CGPoint firstPoint = ccp(self.contentSize.width*1.5, self.contentSize.height*.1);
+    
+
+    
+    
+    CCButton *playAgain = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"playagain-button.png"]];
+    [playAgain setTarget:self selector:@selector(playAgainButton:)];
+    [playAgain setPosition:firstPoint];
+    [self addChild:playAgain];
+    
+    CCButton *menu = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"menu-button.png"]];
+    [menu setTarget:self selector:@selector(menuButton:)];
+    [menu setPosition:ccp(firstPoint.x,firstPoint.y + menu.contentSize.height*1.25)];
+    [self addChild:menu];
+    
+    
+    CGPoint pos = ccp(self.contentSize.width*1.5,self.contentSize.height*.65);
+    
+    
+    CCSprite *HUD = [[CCSprite alloc] initWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"clock-gameover.png"]];
+    [gameSpriteBatchNode addChild:HUD z:100];
+    [HUD setPosition:pos];
+    
+    highScore = [[CCSprite alloc] initWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"highscore.png"] ];
+    [gameSpriteBatchNode addChild:highScore];
+    [highScore setPosition:ccp(pos.x,pos.y + highScore.contentSize.height*2)];
+    [highScore setVisible:false];
+    
+    gameoverMeter = [[CCProgressNode alloc] initWithSprite:[CCSprite spriteWithImageNamed:@"gameover-meter.png"]];
+    [gameoverMeter setType:CCProgressNodeTypeRadial];
+    [gameoverMeter setPercentage:0];
+    [gameoverMeter setReverseDirection:true];
+    [gameoverMeter setPosition:pos];
+    [self addChild:gameoverMeter z:10000];
+    
+    gameoverLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Verdana-Bold" fontSize:60];
+    [gameoverLabel setColor:[CCColor colorWithCcColor3b:ccc3(241, 198, 19)]];
+    [self addChild:gameoverLabel z:1000];
+    [gameoverLabel setPosition:ccp(pos.x,pos.y + HUD.contentSize.height*0.1)];
+
+    
+}
+-(void) setupGameLayer{
+
+    board = [[Board alloc] initAtLocation:ccp(self.contentSize.width/2,self.contentSize.height*0.4) andSpritesheet:gameSpriteBatchNode];
+    [gameSpriteBatchNode addChild:board z: -1000];
+
+}
 - (id)init
 {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
-    
+
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
-    
-    // Create a colored background
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f]];
-    [self addChild:background z: -100];
-    //
-    
-    //    // Create a back button
-    //    CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
-    //    backButton.positionType = CCPositionTypeNormalized;
-    //    backButton.position = ccp(0.85f, 0.95f); // Top Right of screen
-    //    [backButton setTarget:self selector:@selector(onBackClicked:)];
-    //    [self addChild:backButton];
-    
     
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"TileSpritesheet.plist"];
     gameSpriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"TileSpritesheet.png"];
     
     [self addChild:gameSpriteBatchNode z:100];
     
-    board = [[Board alloc] initAtLocation:ccp(self.contentSize.width/2,self.contentSize.height*0.4) andSpritesheet:gameSpriteBatchNode];
-    [gameSpriteBatchNode addChild:board z: -1000];
+
+    [self setupGameOver];
     
+    sceneState = kGameLayerScene;
+    
+    [self setupGameLayer];
     
     [self setupHUD];
-    
-    
-    
     
     // done
     return self;
@@ -174,8 +290,9 @@
 - (void)onEnter
 {
     // always call super onEnter first
-    [super onEnter];
     
+    [super onEnter];
+    self.color = [CCColor whiteColor];
     // In pre-v3, touch enable and scheduleUpdate was called here
     // In v3, touch is enabled by setting userInteractionEnabled for the individual nodes
     // Per frame update is automatically enabled, if update is overridden

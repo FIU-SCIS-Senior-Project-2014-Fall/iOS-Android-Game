@@ -16,6 +16,6 @@
 @property (readwrite, nonatomic) int highScoreMoves;
 
 +(GameManager*)sharedGameManager;
--(void) updateHighScore:(int)newScore;
+-(int) updateHighScore:(int)newScore;
 
 @end

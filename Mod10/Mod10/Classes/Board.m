@@ -332,6 +332,13 @@
     
     [self fillBoard];
 }
+-(void)cleanUpBoard{
+    for (int i = 0 ; i < 25; i++){
+        [tiles[i] removeFromParentAndCleanup:YES];
+    }
+
+}
+
 -(id) initAtLocation:(CGPoint)location andSpritesheet:(CCSpriteBatchNode*)s
 {
     if( (self=[super init]) )

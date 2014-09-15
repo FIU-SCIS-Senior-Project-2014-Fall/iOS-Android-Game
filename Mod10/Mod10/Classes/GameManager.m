@@ -38,25 +38,32 @@ static GameManager* _sharedGameManager = nil;
 -(void) saveGame{
     [[GameState sharedInstance] save];
 }
--(void) updateHighScore:(int)newScore{
+-(int) updateHighScore:(int)newScore{
     
+    int highScore = 0;
     switch (self.curMode) {
+            
         case kMovesMode:
+            highScore = self.highScoreMoves;
             if (newScore >= self.highScoreMoves){
                 CCLOG(@"HIGH SCORE MOVES %i", newScore);
                 self.highScoreMoves = newScore;
+
             }
             break;
         case kTimedMode:
+            highScore = self.highScoreTimed;
+
             if (newScore >= self.highScoreTimed){
                 CCLOG(@"HIGH SCORE TIMED %i", newScore);
                 self.highScoreTimed = newScore;
-            }
+                            }
             break;
         default:
             break;
     }
     [self saveGame];
+    return  highScore;
 }
 
 -(id)init {
@@ -67,7 +74,7 @@ static GameManager* _sharedGameManager = nil;
         
         [GameState sharedInstance];
         
-        self.curMode = kMovesMode;
+        self.curMode = kTimedMode;
         
     }
     return self;
