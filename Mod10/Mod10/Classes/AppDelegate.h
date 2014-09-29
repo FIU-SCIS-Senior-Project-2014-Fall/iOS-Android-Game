@@ -7,7 +7,9 @@
 //
 // -----------------------------------------------------------------------
 
+#import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
 @interface AppDelegate : CCAppDelegate
+@property (nonatomic, retain) UIViewController * viewController;
 @end

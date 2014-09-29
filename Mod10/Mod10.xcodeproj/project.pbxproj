@@ -194,6 +194,11 @@
 		D2A6B38419C5F584001924BA /* GCDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A6B38319C5F584001924BA /* GCDatabase.m */; };
 		D2A6B38A19C5F5B9001924BA /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A6B38919C5F5B9001924BA /* GameState.m */; };
 		D2A6B38D19C5F5D9001924BA /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A6B38C19C5F5D9001924BA /* HelloWorldScene.m */; };
+		D2AA711219D890E40026427C /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA711119D890E40026427C /* MainMenuScene.m */; };
+		D2AA711519D891E60026427C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA711319D891C90026427C /* GameKit.framework */; };
+		D2AA712119D8988D0026427C /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA712019D8988D0026427C /* NetworkController.m */; };
+		D2AA712719D8A4970026427C /* MessageWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA712619D8A4970026427C /* MessageWriter.m */; };
+		D2AA712A19D8B3810026427C /* MessageReader.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA712919D8B3810026427C /* MessageReader.m */; };
 		D2F4D30719C5EFF60037D55A /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D30519C5EFF60037D55A /* OpenAL.framework */; };
 		D2F4D30A19C5EFFE0037D55A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D30919C5EFFE0037D55A /* UIKit.framework */; };
 		D2F4D30C19C5F0050037D55A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F4D30B19C5F0050037D55A /* QuartzCore.framework */; };
@@ -607,6 +612,15 @@
 		D2A6B38B19C5F5D9001924BA /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
 		D2A6B38C19C5F5D9001924BA /* HelloWorldScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelloWorldScene.m; path = Classes/HelloWorldScene.m; sourceTree = "<group>"; };
 		D2A6B38E19C5F607001924BA /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Classes/Constants.h; sourceTree = "<group>"; };
+		D2AA711019D890E40026427C /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuScene.h; path = Classes/MainMenuScene.h; sourceTree = "<group>"; };
+		D2AA711119D890E40026427C /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenuScene.m; path = Classes/MainMenuScene.m; sourceTree = "<group>"; };
+		D2AA711319D891C90026427C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		D2AA711F19D8988D0026427C /* NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkController.h; path = Classes/NetworkController.h; sourceTree = "<group>"; };
+		D2AA712019D8988D0026427C /* NetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkController.m; path = Classes/NetworkController.m; sourceTree = "<group>"; };
+		D2AA712519D8A4970026427C /* MessageWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageWriter.h; path = Classes/MessageWriter.h; sourceTree = "<group>"; };
+		D2AA712619D8A4970026427C /* MessageWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageWriter.m; path = Classes/MessageWriter.m; sourceTree = "<group>"; };
+		D2AA712819D8B3810026427C /* MessageReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageReader.h; path = Classes/MessageReader.h; sourceTree = "<group>"; };
+		D2AA712919D8B3810026427C /* MessageReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageReader.m; path = Classes/MessageReader.m; sourceTree = "<group>"; };
 		D2F4D30519C5EFF60037D55A /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D2F4D30619C5EFF60037D55A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		D2F4D30919C5EFFE0037D55A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -629,6 +643,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2AA711519D891E60026427C /* GameKit.framework in Frameworks */,
 				D2F4D31E19C5F0CC0037D55A /* libObjectiveChipmunk.a in Frameworks */,
 				D2F4D31A19C5F0750037D55A /* AudioToolbox.framework in Frameworks */,
 				D2F4D31B19C5F0750037D55A /* GLKit.framework in Frameworks */,
@@ -1418,28 +1433,61 @@
 		D26C8B2219C5EAD400B9931E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D2AA711819D893080026427C /* Objects */,
+				D2AA711719D892FD0026427C /* Helpers */,
+				D2AA711619D892E30026427C /* Scenes */,
 				D2F4D33B19C5F2930037D55A /* AppDelegate.m */,
 				D2F4D33D19C5F2A60037D55A /* AppDelegate.h */,
-				D2A6B37619C5F4D0001924BA /* Board.h */,
-				D2A6B37719C5F4D0001924BA /* Board.m */,
-				D2A6B37919C5F4FF001924BA /* Tile.h */,
-				D2A6B37A19C5F4FF001924BA /* Tile.m */,
 				D2A6B37C19C5F52C001924BA /* GameManager.h */,
 				D2A6B37D19C5F52C001924BA /* GameManager.m */,
-				D2A6B38219C5F584001924BA /* GCDatabase.h */,
-				D2A6B38319C5F584001924BA /* GCDatabase.m */,
-				D2A6B38819C5F5B9001924BA /* GameState.h */,
-				D2A6B38919C5F5B9001924BA /* GameState.m */,
-				D2A6B38B19C5F5D9001924BA /* HelloWorldScene.h */,
-				D2A6B38C19C5F5D9001924BA /* HelloWorldScene.m */,
 				D2A6B38E19C5F607001924BA /* Constants.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		D2AA711619D892E30026427C /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				D2A6B38B19C5F5D9001924BA /* HelloWorldScene.h */,
+				D2A6B38C19C5F5D9001924BA /* HelloWorldScene.m */,
+				D2AA711019D890E40026427C /* MainMenuScene.h */,
+				D2AA711119D890E40026427C /* MainMenuScene.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		D2AA711719D892FD0026427C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D2A6B38219C5F584001924BA /* GCDatabase.h */,
+				D2A6B38319C5F584001924BA /* GCDatabase.m */,
+				D2A6B38819C5F5B9001924BA /* GameState.h */,
+				D2A6B38919C5F5B9001924BA /* GameState.m */,
+				D2AA711F19D8988D0026427C /* NetworkController.h */,
+				D2AA712019D8988D0026427C /* NetworkController.m */,
+				D2AA712519D8A4970026427C /* MessageWriter.h */,
+				D2AA712619D8A4970026427C /* MessageWriter.m */,
+				D2AA712819D8B3810026427C /* MessageReader.h */,
+				D2AA712919D8B3810026427C /* MessageReader.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		D2AA711819D893080026427C /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				D2A6B37619C5F4D0001924BA /* Board.h */,
+				D2A6B37719C5F4D0001924BA /* Board.m */,
+				D2A6B37919C5F4FF001924BA /* Tile.h */,
+				D2A6B37A19C5F4FF001924BA /* Tile.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 		D2F4D31919C5F0520037D55A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2AA711319D891C90026427C /* GameKit.framework */,
 				D2F4D31719C5F0370037D55A /* AudioToolbox.framework */,
 				D2F4D31519C5F0310037D55A /* GLKit.framework */,
 				D2F4D31319C5F02B0037D55A /* Foundation.framework */,
@@ -1501,6 +1549,7 @@
 				TargetAttributes = {
 					D26C88BD19C5EACF00B9931E = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 9U2VGZ8W8R;
 					};
 					D26C88C119C5EACF00B9931E = {
 						CreatedOnToolsVersion = 6.0;
@@ -1592,6 +1641,7 @@
 				D26C89F819C5EAD200B9931E /* base64.c in Sources */,
 				D26C898119C5EAD100B9931E /* CCParticleSystemBase.m in Sources */,
 				D26C89E619C5EAD200B9931E /* UITouch+CC.m in Sources */,
+				D2AA712A19D8B3810026427C /* MessageReader.m in Sources */,
 				D26C8A8019C5EAD300B9931E /* CCButton.m in Sources */,
 				D26C897219C5EAD100B9931E /* CCParallaxNode.m in Sources */,
 				D26C8A0519C5EAD200B9931E /* ccUtils.c in Sources */,
@@ -1603,6 +1653,7 @@
 				D26C8A9919C5EAD300B9931E /* CCAnimationManager.m in Sources */,
 				D26C896E19C5EAD100B9931E /* CCNode+Debug.m in Sources */,
 				D26C890C19C5EAD000B9931E /* CCEffectNode.m in Sources */,
+				D2AA712719D8A4970026427C /* MessageWriter.m in Sources */,
 				D26C898619C5EAD100B9931E /* CCPhysicsBody.m in Sources */,
 				D26C89F619C5EAD200B9931E /* NSEvent+CC.m in Sources */,
 				D26C8A4D19C5EAD200B9931E /* ALDevice.m in Sources */,
@@ -1617,6 +1668,7 @@
 				D2A6B38A19C5F5B9001924BA /* GameState.m in Sources */,
 				D26C8A9019C5EAD300B9931E /* CCTableView.m in Sources */,
 				D26C895F19C5EAD100B9931E /* CCLayout.m in Sources */,
+				D2AA711219D890E40026427C /* MainMenuScene.m in Sources */,
 				D26C898F19C5EAD100B9931E /* CCPhysicsShape.m in Sources */,
 				D26C891519C5EAD000B9931E /* CCRenderer.m in Sources */,
 				D26C89AA19C5EAD100B9931E /* CCSprite.m in Sources */,
@@ -1631,6 +1683,7 @@
 				D26C898C19C5EAD100B9931E /* CCPhysicsNode.m in Sources */,
 				D26C8A2E19C5EAD200B9931E /* OALUtilityActions.m in Sources */,
 				D26C896619C5EAD100B9931E /* CCMotionStreak.m in Sources */,
+				D2AA712119D8988D0026427C /* NetworkController.m in Sources */,
 				D26C8A7019C5EAD300B9931E /* NSMutableArray+WeakReferences.m in Sources */,
 				D26C8A5E19C5EAD300B9931E /* OpenALManager.m in Sources */,
 				D26C89CE19C5EAD200B9931E /* CCTMXXMLParser.m in Sources */,
@@ -1791,6 +1844,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1814,6 +1868,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mod10/Supporting Files/Prefix.pch";

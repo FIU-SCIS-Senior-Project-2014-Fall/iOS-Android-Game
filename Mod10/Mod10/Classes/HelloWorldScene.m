@@ -161,6 +161,8 @@
         [timeLabel setColor:[CCColor colorWithCcColor3b:ccc3(241, 198, 19)]];
         [self addChild:timeLabel z:1000];
         [timeLabel setPosition:ccp(self.contentSize.width*.2,self.contentSize.height*.85)];
+        [timeLabel setVisible:false];
+        
     }
     else if ([[GameManager sharedGameManager] curMode] == kMovesMode){
         moveLabel = [CCLabelTTF labelWithString:@"Moves: 30" fontName:@"Verdana-Bold" fontSize:24];

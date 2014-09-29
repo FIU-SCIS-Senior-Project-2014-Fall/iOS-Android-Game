@@ -11,7 +11,7 @@
 
 
 #define MAX_MOVES 1
-#define MAX_TIME 60
+#define MAX_TIME 120
 #define ROWS 5
 #define COLUMNS 5
 

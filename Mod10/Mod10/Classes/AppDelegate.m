@@ -10,9 +10,11 @@
 #import "AppDelegate.h"
 #import "HelloWorldScene.h"
 #import "GameManager.h"
+#import "MainMenuScene.h"
+#import "NetworkController.h"
 
 @implementation AppDelegate
-
+@synthesize viewController;
 //
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -50,7 +52,8 @@
 -(CCScene *)startScene
 {
     // This method should return the very first scene to be run when your app starts.
-    return [HelloWorldScene scene];
+    [[NetworkController sharedInstance] authenticateLocalUser];
+    return [MainMenuScene scene];
 }
 
 @end
