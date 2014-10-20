@@ -11,6 +11,7 @@
 @interface Tile : CCSprite
 
 -(id) initAtLocation:(CGPoint)location withIndex:(int)i;
+-(id) initAtLocation:(CGPoint)location withIndex:(int)i andVal:(int) val;
 -(void) moveTo:(CGPoint)destination;
 -(int*)getAdjacents;
 -(BOOL) isAdjacentTo:(int)dx;

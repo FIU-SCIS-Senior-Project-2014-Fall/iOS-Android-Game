@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "NetworkController.h"
 
-@interface MainMenuScene : CCScene <NetworkControllerDelegate>{
+@interface MainMenuScene : CCScene{
     
 }
 + (MainMenuScene *)scene;

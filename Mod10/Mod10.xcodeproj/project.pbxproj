@@ -6,7 +6,23 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		D287F10C19E21E500060EA2A /* Mod10Network */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = D287F10D19E21E500060EA2A /* Build configuration list for PBXAggregateTarget "Mod10Network" */;
+			buildPhases = (
+			);
+			dependencies = (
+				D287F11119E21E5F0060EA2A /* PBXTargetDependency */,
+			);
+			name = Mod10Network;
+			productName = Mod10Network;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
+		D218E88A19E2CF6A004FBC9A /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = D218E88919E2CF6A004FBC9A /* Move.m */; };
+		D23C751D19F55C9B00BF7C40 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23C751B19F55C8C00BF7C40 /* Social.framework */; };
 		D26C88C619C5EACF00B9931E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D26C88C519C5EACF00B9931E /* Default.png */; };
 		D26C88C819C5EACF00B9931E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D26C88C719C5EACF00B9931E /* Default@2x.png */; };
 		D26C88CA19C5EACF00B9931E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D26C88C919C5EACF00B9931E /* Default-568h@2x.png */; };
@@ -188,6 +204,9 @@
 		D26C8B1B19C5EAD400B9931E /* ChipmunkSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = D26C8B1A19C5EAD400B9931E /* ChipmunkSpace.m */; };
 		D26C8B1D19C5EAD400B9931E /* LICENSE_Chipmunk.txt in Resources */ = {isa = PBXBuildFile; fileRef = D26C8B1C19C5EAD400B9931E /* LICENSE_Chipmunk.txt */; };
 		D26C8B2119C5EAD400B9931E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D26C8B2019C5EAD400B9931E /* main.m */; };
+		D287F10519E20EDE0060EA2A /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = D287F10419E20EDE0060EA2A /* Player.m */; };
+		D287F10819E20FA70060EA2A /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = D287F10719E20FA70060EA2A /* Match.m */; };
+		D287F10B19E211190060EA2A /* MultiplayerScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D287F10A19E211190060EA2A /* MultiplayerScene.m */; };
 		D2A6B37819C5F4D0001924BA /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A6B37719C5F4D0001924BA /* Board.m */; };
 		D2A6B37B19C5F4FF001924BA /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A6B37A19C5F4FF001924BA /* Tile.m */; };
 		D2A6B37E19C5F52C001924BA /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A6B37D19C5F52C001924BA /* GameManager.m */; };
@@ -216,7 +235,20 @@
 		D2F4D33C19C5F2930037D55A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F4D33B19C5F2930037D55A /* AppDelegate.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D287F11019E21E5F0060EA2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D26C88B619C5EACF00B9931E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D26C88BD19C5EACF00B9931E;
+			remoteInfo = Mod10;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		D218E88819E2CF6A004FBC9A /* Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Move.h; path = Classes/Move.h; sourceTree = "<group>"; };
+		D218E88919E2CF6A004FBC9A /* Move.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Move.m; path = Classes/Move.m; sourceTree = "<group>"; };
+		D23C751B19F55C8C00BF7C40 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D26C88BE19C5EACF00B9931E /* Mod10.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mod10.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26C88C219C5EACF00B9931E /* libObjectiveChipmunk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectiveChipmunk.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26C88C519C5EACF00B9931E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
@@ -599,6 +631,12 @@
 		D26C8B1C19C5EAD400B9931E /* LICENSE_Chipmunk.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE_Chipmunk.txt; path = Libraries/LICENSE_Chipmunk.txt; sourceTree = "<group>"; };
 		D26C8B1F19C5EAD400B9931E /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = "Supporting Files/Prefix.pch"; sourceTree = "<group>"; };
 		D26C8B2019C5EAD400B9931E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
+		D287F10319E20EDE0060EA2A /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = Classes/Player.h; sourceTree = "<group>"; };
+		D287F10419E20EDE0060EA2A /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Player.m; path = Classes/Player.m; sourceTree = "<group>"; };
+		D287F10619E20FA70060EA2A /* Match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Match.h; path = Classes/Match.h; sourceTree = "<group>"; };
+		D287F10719E20FA70060EA2A /* Match.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Match.m; path = Classes/Match.m; sourceTree = "<group>"; };
+		D287F10919E211190060EA2A /* MultiplayerScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplayerScene.h; sourceTree = "<group>"; };
+		D287F10A19E211190060EA2A /* MultiplayerScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplayerScene.m; sourceTree = "<group>"; };
 		D2A6B37619C5F4D0001924BA /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = Classes/Board.h; sourceTree = "<group>"; };
 		D2A6B37719C5F4D0001924BA /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Board.m; path = Classes/Board.m; sourceTree = "<group>"; };
 		D2A6B37919C5F4FF001924BA /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tile.h; path = Classes/Tile.h; sourceTree = "<group>"; };
@@ -643,6 +681,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D23C751D19F55C9B00BF7C40 /* Social.framework in Frameworks */,
 				D2AA711519D891E60026427C /* GameKit.framework in Frameworks */,
 				D2F4D31E19C5F0CC0037D55A /* libObjectiveChipmunk.a in Frameworks */,
 				D2F4D31A19C5F0750037D55A /* AudioToolbox.framework in Frameworks */,
@@ -1433,6 +1472,7 @@
 		D26C8B2219C5EAD400B9931E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D287F10219E20ECB0060EA2A /* Multiplayer */,
 				D2AA711819D893080026427C /* Objects */,
 				D2AA711719D892FD0026427C /* Helpers */,
 				D2AA711619D892E30026427C /* Scenes */,
@@ -1443,6 +1483,19 @@
 				D2A6B38E19C5F607001924BA /* Constants.h */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		D287F10219E20ECB0060EA2A /* Multiplayer */ = {
+			isa = PBXGroup;
+			children = (
+				D287F10319E20EDE0060EA2A /* Player.h */,
+				D287F10419E20EDE0060EA2A /* Player.m */,
+				D287F10619E20FA70060EA2A /* Match.h */,
+				D287F10719E20FA70060EA2A /* Match.m */,
+				D287F10919E211190060EA2A /* MultiplayerScene.h */,
+				D287F10A19E211190060EA2A /* MultiplayerScene.m */,
+			);
+			name = Multiplayer;
 			sourceTree = "<group>";
 		};
 		D2AA711619D892E30026427C /* Scenes */ = {
@@ -1480,6 +1533,8 @@
 				D2A6B37719C5F4D0001924BA /* Board.m */,
 				D2A6B37919C5F4FF001924BA /* Tile.h */,
 				D2A6B37A19C5F4FF001924BA /* Tile.m */,
+				D218E88819E2CF6A004FBC9A /* Move.h */,
+				D218E88919E2CF6A004FBC9A /* Move.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -1487,6 +1542,7 @@
 		D2F4D31919C5F0520037D55A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D23C751B19F55C8C00BF7C40 /* Social.framework */,
 				D2AA711319D891C90026427C /* GameKit.framework */,
 				D2F4D31719C5F0370037D55A /* AudioToolbox.framework */,
 				D2F4D31519C5F0310037D55A /* GLKit.framework */,
@@ -1554,6 +1610,9 @@
 					D26C88C119C5EACF00B9931E = {
 						CreatedOnToolsVersion = 6.0;
 					};
+					D287F10C19E21E500060EA2A = {
+						CreatedOnToolsVersion = 6.0;
+					};
 				};
 			};
 			buildConfigurationList = D26C88B919C5EACF00B9931E /* Build configuration list for PBXProject "Mod10" */;
@@ -1570,6 +1629,7 @@
 			targets = (
 				D26C88BD19C5EACF00B9931E /* Mod10 */,
 				D26C88C119C5EACF00B9931E /* ObjectiveChipmunk */,
+				D287F10C19E21E500060EA2A /* Mod10Network */,
 			);
 		};
 /* End PBXProject section */
@@ -1648,6 +1708,7 @@
 				D26C896219C5EAD100B9931E /* CCLayoutBox.m in Sources */,
 				D26C89BB19C5EAD100B9931E /* CCTexture.m in Sources */,
 				D26C8A0D19C5EAD200B9931E /* CGPointExtension.m in Sources */,
+				D287F10519E20EDE0060EA2A /* Player.m in Sources */,
 				D2A6B38419C5F584001924BA /* GCDatabase.m in Sources */,
 				D26C893719C5EAD000B9931E /* CCActionTween.m in Sources */,
 				D26C8A9919C5EAD300B9931E /* CCAnimationManager.m in Sources */,
@@ -1692,6 +1753,7 @@
 				D26C8A9319C5EAD300B9931E /* CCTextField.m in Sources */,
 				D26C896B19C5EAD100B9931E /* CCNode.m in Sources */,
 				D26C8AAB19C5EAD300B9931E /* CCBLocalizationManager.m in Sources */,
+				D287F10B19E211190060EA2A /* MultiplayerScene.m in Sources */,
 				D26C898919C5EAD100B9931E /* CCPhysicsJoint.m in Sources */,
 				D26C89BE19C5EAD100B9931E /* CCTextureCache.m in Sources */,
 				D26C890219C5EAD000B9931E /* CCEffectContrast.m in Sources */,
@@ -1709,6 +1771,7 @@
 				D26C897919C5EAD100B9931E /* CCParticleExamples.m in Sources */,
 				D2A6B37E19C5F52C001924BA /* GameManager.m in Sources */,
 				D26C894519C5EAD000B9931E /* CCConfiguration.m in Sources */,
+				D287F10819E20FA70060EA2A /* Match.m in Sources */,
 				D26C8A4A19C5EAD200B9931E /* ALContext.m in Sources */,
 				D26C892419C5EAD000B9931E /* CCActionCatmullRom.m in Sources */,
 				D26C89B619C5EAD100B9931E /* CCSpriteFrameCache.m in Sources */,
@@ -1717,6 +1780,7 @@
 				D26C89A619C5EAD100B9931E /* CCScheduler.m in Sources */,
 				D26C89C419C5EAD100B9931E /* CCTiledMap.m in Sources */,
 				D26C890619C5EAD000B9931E /* CCEffectColorPulse.m in Sources */,
+				D218E88A19E2CF6A004FBC9A /* Move.m in Sources */,
 				D26C899C19C5EAD100B9931E /* CCResponder.m in Sources */,
 				D26C899819C5EAD100B9931E /* CCRenderTexture.m in Sources */,
 				D26C895019C5EAD100B9931E /* ccFPSImages.m in Sources */,
@@ -1796,6 +1860,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D287F11119E21E5F0060EA2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D26C88BD19C5EACF00B9931E /* Mod10 */;
+			targetProxy = D287F11019E21E5F0060EA2A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		D26C8B2C19C5EAD400B9931E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1845,6 +1917,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1859,6 +1932,7 @@
 					"-objC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1869,6 +1943,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mod10/Supporting Files/Prefix.pch";
@@ -1882,6 +1957,7 @@
 					"-objC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1920,6 +1996,20 @@
 			};
 			name = Release;
 		};
+		D287F10E19E21E500060EA2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D287F10F19E21E500060EA2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1946,6 +2036,15 @@
 			buildConfigurations = (
 				D26C8B3219C5EAD400B9931E /* Debug */,
 				D26C8B3319C5EAD400B9931E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D287F10D19E21E500060EA2A /* Build configuration list for PBXAggregateTarget "Mod10Network" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D287F10E19E21E500060EA2A /* Debug */,
+				D287F10F19E21E500060EA2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

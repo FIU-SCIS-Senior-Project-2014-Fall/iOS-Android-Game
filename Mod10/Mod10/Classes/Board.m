@@ -70,17 +70,26 @@
         return -1;
     return stack[stackPtr-1];
 }
-
+/**
+ Creates a tile at a column and with a particular target index and value
+ */
+-(void)createTileAtColumn:(int)column andIndex:(int)index withVal:(int) val{
+    
+    Tile * newTile = [[Tile alloc] initAtLocation:ccp([self getXForColumn:column],SPAWNHEIGHT)  withIndex:index andVal:val];
+    tiles[index] = newTile;
+    [spritesheet addChild:newTile z: 0];
+    
+}
 
 /**
  Creates a tile at a column and with a particular target index
  */
--(void) createTileAtColumn:(int)column andIndex:(int)index{
+-(int) createTileAtColumn:(int)column andIndex:(int)index{
     
     Tile * newTile = [[Tile alloc] initAtLocation:ccp([self getXForColumn:column],SPAWNHEIGHT)  withIndex:index];
     tiles[index] = newTile;
     [spritesheet addChild:newTile z: 0];
-    
+    return [newTile value];
 }
 
 /*
@@ -124,7 +133,29 @@
                 if (k == ROWS-1){ //When the top row is empty
                     CCLOG(@"B");
                     
-                    [self createTileAtColumn:column andIndex:index];
+                    if ( self.usesRandom ){
+                        [self.move.tileVals insertObject:[NSNumber numberWithInt:[self createTileAtColumn:column andIndex:index]] atIndex:0];
+                        
+                    }
+                    else{
+                        
+                        if ([self.move.tileVals lastObject]){
+                            NSNumber *num = [self.move.tileVals lastObject];
+                            int val = [num intValue];
+                            
+                            [self.move.tileVals removeLastObject];
+                            NSLog(@"tileval: %i", val);
+                            
+                            [self createTileAtColumn:column andIndex:index withVal:val];
+                        }
+                        else {
+                            NSLog(@"TODO: get new random tiles from server");
+                            [self.move.tileVals addObject:[NSNumber numberWithInt:[self createTileAtColumn:column andIndex:index]]];
+                            
+                        }
+                        
+                        
+                    }
                     
                     [tiles[index] setCurRow:j];
                     
@@ -241,7 +272,13 @@
     
     BOOL validVals = [self validateRows:row columns:column andIndex:index];
     
-    if (validVals && !tiles[index].isLocked && !fillingBoard){
+    if (validVals)
+        [self selectTileAtIndex:index];
+}
+
+-(void) selectTileAtIndex:(int)index{
+    
+    if (!tiles[index].isLocked && !fillingBoard){
         
         if (curIndex == -1 || [tiles[index]isAdjacentTo:curIndex]) {
             CCLOG(@"VALUE: %i, INDEX: %i",tiles[index].value, index);
@@ -275,27 +312,45 @@
             
         }
     }
-}
 
+    
+}
 
 /**
  Called when a user lifts up his/her finger
  Should do basic clean-up, and remove the tiles
  if the curCounter%10 == 0;
+ returns true if there was a good move
  
  */
--(void) countTiles{
+-(BOOL) countTiles{
+    
     
     CCLOG(@"self.curCounter: %i", self.curCounter);
+    
+    BOOL movesFound = false;
+    
     if (self.curCounter != 0 && self.curCounter%10 == 0 ){
+        
         
         self.movesLeft -= 1;
         
-        self.score += (stackPtr*(self.curCounter/10));
+        if (self.isMyTurn){
+            self.score += (stackPtr*(self.curCounter/10));
+            self.move.score = self.score;
+        }
+        else{
+            self.move.score = (stackPtr*(self.curCounter/10));
+        }
+        
+        movesFound = true;
         
         int i = [self popIndex];
+        
         while (i != -1) {
             CCLOG(@"INDEX TO BE REMOVED: %i",i);
+            [self.move.indices addObject:[NSNumber numberWithInt:i]];
+            
             [tiles[i] deleteTile];
             tiles[i] = NULL;
             i = [self popIndex];
@@ -317,6 +372,8 @@
     }
     stackPtr = -1;
     
+    
+    return movesFound;
 }
 -(void) newGame {
     self.score = 0;
@@ -332,6 +389,7 @@
     
     [self fillBoard];
 }
+
 -(void)cleanUpBoard{
     for (int i = 0 ; i < 25; i++){
         [tiles[i] removeFromParentAndCleanup:YES];
@@ -349,18 +407,19 @@
         
         [self setSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"Frame.png"]];
         
+        self.move = [Move new];
+        
         float edgeBuff = (self.contentSize.width - (5*TILE_SIZE))/2;
         
         LOW_BOUND = (self.position.y - (self.contentSize.height*0.5)) + edgeBuff;
         LEFT_BOUND = self.position.x - (self.contentSize.width*0.5) + edgeBuff;
         
-        
-        
-        
-        [self newGame];
+        self.usesRandom = TRUE;
+        self.isMyTurn = FALSE;
         
         
     }
+    
     return self;
 }
 

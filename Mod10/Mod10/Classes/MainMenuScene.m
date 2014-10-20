@@ -18,12 +18,7 @@
     
     return [[self alloc] init];
 }
-- (void)stateChanged:(NetworkState)state {
-}
-- (void)setNotInMatch {
-    CCAppDelegate * delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    [[NetworkController sharedInstance] findMatchWithMinPlayers:2 maxPlayers:2 viewController:delegate.navController];
-}
+
 
 - (id)init
 {
@@ -31,8 +26,6 @@
     self = [super init];
     if (!self) return(nil);
     
-    [NetworkController sharedInstance].delegate = self;
-    [self stateChanged:[NetworkController sharedInstance].state];
     
     return self;
     

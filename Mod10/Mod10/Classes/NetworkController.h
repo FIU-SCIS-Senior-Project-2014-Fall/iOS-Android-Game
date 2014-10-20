@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
+#import "Move.h"
 
 typedef enum {
     NetworkStateNotAvailable,
@@ -23,30 +24,24 @@ typedef enum {
     
 } NetworkState;
 
+@class Match;
+
 @protocol NetworkControllerDelegate
 - (void)stateChanged:(NetworkState)state;
 - (void)setNotInMatch;
+- (void)matchStarted:(Match *)theMatch andArr:(NSArray * ) tileVals;
+- (void)player:(unsigned char)playerIndex moved:(Move*)move;
+- (void)gameOver:(unsigned char)winnerIndex;
 @end
 
 @interface NetworkController : NSObject <NSStreamDelegate, GKMatchmakerViewControllerDelegate> {
-    NSMutableData *_outputBuffer;
-    NSMutableData *_inputBuffer;
-    BOOL _okToWrite;
-    BOOL _gameCenterAvailable;
-    BOOL _userAuthenticated;
-    NetworkState _state;
-    NSInputStream *_inputStream;
-    NSOutputStream *_outputStream;
-    BOOL _inputOpened;
-    BOOL _outputOpened;
-    UIViewController *_presentingViewController;
-    GKMatchmakerViewController *_mmvc;
+
 }
 
-@property (assign, readonly) BOOL gameCenterAvailable;
-@property (assign, readonly) BOOL userAuthenticated;
+@property (assign) BOOL gameCenterAvailable;
+@property (assign) BOOL userAuthenticated;
 @property (assign) id <NetworkControllerDelegate> delegate;
-@property (assign, readonly) NetworkState state;
+@property (assign,readonly) NetworkState state;
 @property (retain) NSInputStream *inputStream;
 @property (retain) NSOutputStream *outputStream;
 @property (assign) BOOL inputOpened;
@@ -56,10 +51,14 @@ typedef enum {
 @property (retain) NSMutableData *inputBuffer;
 @property (retain) UIViewController *presentingViewController;
 @property (retain) GKMatchmakerViewController *mmvc;
+@property (retain) GKInvite *pendingInvite;
+@property (retain) NSArray *pendingPlayersToInvite;
 
 + (NetworkController *)sharedInstance;
 - (void)authenticateLocalUser;
 - (void)findMatchWithMinPlayers:(int)minPlayers maxPlayers:(int)maxPlayers
                  viewController:(UIViewController *)viewController;
+- (void)sendMovedSelf:(int)posX;
+-(void)sendMove:(Move*) move;
 
 @end

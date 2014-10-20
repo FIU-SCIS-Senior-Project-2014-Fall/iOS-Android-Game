@@ -12,6 +12,9 @@
 #import "Board.h"
 #import "GameManager.h"
 #import "Constants.h"
+#import <Social/Social.h>
+#import "AppDelegate.h"
+
 // -----------------------------------------------------------------------
 #pragma mark - HelloWorldScene
 // -----------------------------------------------------------------------
@@ -180,6 +183,7 @@
     [gameoverLabel setString:@"0"];
 }
 - (void) playAgainButton:(id)sender{
+    
     CCLOG(@"PLAY AGAIN");
     if (sceneState == kChangingScenes)
         return;
@@ -197,6 +201,42 @@
     
 
 }
+
+-(void) facebookButton:(id)sender{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
+        
+        SLComposeViewController *fbSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        [fbSheet setInitialText:@"Posting to FB :]"];
+        [[CCDirector sharedDirector]presentModalViewController:fbSheet animated:YES];
+   
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't post to FB right now. Make sure to log in under settings." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        
+        [alertView show];
+    }
+    
+}
+-(void) twitterButton:(id)sender{
+    
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        NSString *tweetString = [NSString stringWithFormat:@"I just scored %i point(s) playing Mod 10 **URL HERE** :]",[board score]];
+        [tweetSheet setInitialText:tweetString];
+        
+        [[CCDirector sharedDirector]presentModalViewController:tweetSheet animated:YES];
+        
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"You can't set a tweet right now. Make sure to log in under settings." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        
+        [alertView show];
+    }
+    
+}
 - (void) menuButton:(id)sender{
     CCLOG(@"MENU BUTTON");
     
@@ -204,9 +244,6 @@
 - (void) setupGameOver{
     
     CGPoint firstPoint = ccp(self.contentSize.width*1.5, self.contentSize.height*.1);
-    
-
-    
     
     CCButton *playAgain = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"playagain-button.png"]];
     [playAgain setTarget:self selector:@selector(playAgainButton:)];
@@ -243,12 +280,27 @@
     [self addChild:gameoverLabel z:1000];
     [gameoverLabel setPosition:ccp(pos.x,pos.y + HUD.contentSize.height*0.1)];
 
+    CCButton *tweetButton = [CCButton buttonWithTitle:@"[ Tweet ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    //tweetButton.positionType = CCPositionTypeNormalized;
+    tweetButton.position = ccp(pos.x-self.contentSize.width*.2, self.contentSize.height*.95);
+    [tweetButton setColor:[[CCColor alloc] initWithCcColor3b:ccBLACK]];
+    [tweetButton setTarget:self selector:@selector(twitterButton:)];
+    [self addChild:tweetButton z:10000000000];
+    
+    CCButton *facebookButton = [CCButton buttonWithTitle:@"[ FB ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    //facebookButton.positionType = CCPositionTypeNormalized;
+    facebookButton.position = ccp(pos.x+self.contentSize.width*.2, self.contentSize.height*.95);
+    [facebookButton setColor:[[CCColor alloc] initWithCcColor3b:ccBLACK]];
+    [facebookButton setTarget:self selector:@selector(facebookButton:)];
+    [self addChild:facebookButton];
     
 }
 -(void) setupGameLayer{
 
     board = [[Board alloc] initAtLocation:ccp(self.contentSize.width/2,self.contentSize.height*0.4) andSpritesheet:gameSpriteBatchNode];
     [gameSpriteBatchNode addChild:board z: -1000];
+    [board newGame];
+    board.isMyTurn = YES;
 
 }
 - (id)init

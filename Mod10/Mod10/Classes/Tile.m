@@ -10,6 +10,7 @@
 
 #define SCREEN_WIDTH 640
 #define SPEED_FACTOR 10
+#define GENERATE_RANDOM_TILE -1
 
 @implementation Tile{
     int adjacents[4]; //top, bottom, right, left
@@ -97,10 +98,17 @@
     [self runAction:actionMove];
     
 }
-
--(void) setTileNumber{
+/**
+ 
+ val of -1 means that a randomly generated number should be used
+ 
+ */
+-(void) setTileNumber:(int) val{
     
-    self.value = [self getRandomNumberBetween:1 maxNumber:9];
+    if (val == GENERATE_RANDOM_TILE)
+        self.value = [self getRandomNumberBetween:1 maxNumber:9];
+    else
+        self.value = val;
     
     if (self.value >= 0 && self.value <10){
         
@@ -121,6 +129,8 @@
     
     //[self removeFromParentAndCleanup:TRUE];
 }
+
+
 -(id) initAtLocation:(CGPoint)location withIndex:(int)i
 {
     if( (self=[super init]) )
@@ -130,7 +140,37 @@
         self.isLocked = false;
         self.isTouched = false;
         
-        [self setTileNumber ];
+        [self setTileNumber: GENERATE_RANDOM_TILE ];
+        
+        CCLOG(@"INITVAL: %i, INDEX: %i",self.value, self.index);
+        self.position=location;
+        
+        for (int i = 0; i < 4; i++)
+            adjacents[i] = -1;
+        
+        //int zValues [25] = {20,21,22,23,24,15,16,17,18,19,10,11,12,13,14,5,6,7,8,9,0,1,2,3,4};
+        
+        int k = 0;
+        for (int j = 20; j >= 0; j-=5)
+            for (int i = 0; i < 5; i ++){
+                zValues[k++] = j + i;
+            }
+        
+        
+    }
+    return self;
+}
+
+-(id) initAtLocation:(CGPoint)location withIndex:(int)i andVal:(int) val
+{
+    if( (self=[super init]) )
+    {
+        
+        self.index = i;
+        self.isLocked = false;
+        self.isTouched = false;
+        
+        [self setTileNumber: val ];
         
         CCLOG(@"INITVAL: %i, INDEX: %i",self.value, self.index);
         self.position=location;

@@ -12,12 +12,29 @@
 #import "GameManager.h"
 #import "MainMenuScene.h"
 #import "NetworkController.h"
+#import "MultiplayerScene.h"
 
 @implementation AppDelegate
 @synthesize viewController;
 //
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    //-- Set Notification
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
+    {
+        // iOS 8 Notifications
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        
+        [application registerForRemoteNotifications];
+    }
+    else
+    {
+        // iOS < 8 Notifications
+        [application registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    }
+    
     // This is the only app delegate method you need to implement when inheriting from CCAppDelegate.
     // This method is a good place to add one time setup code that only runs when your app is first launched.
     
@@ -48,12 +65,20 @@
     
     return YES;
 }
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    NSLog(@"My token is: %@", deviceToken);
+}
 
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    NSLog(@"Failed to get token, error: %@", error);
+}
 -(CCScene *)startScene
 {
     // This method should return the very first scene to be run when your app starts.
-    [[NetworkController sharedInstance] authenticateLocalUser];
-    return [MainMenuScene scene];
+    //[[NetworkController sharedInstance] authenticateLocalUser];
+    return [HelloWorldScene scene];//[MultiplayerScene scene]; //[MainMenuScene scene];
 }
 
 @end

@@ -8,6 +8,8 @@
 #import "NetworkController.h"
 #import "MessageWriter.h"
 #import "MessageReader.h"
+#import "Match.h"
+#import "Player.h"
 
 @interface NetworkController (PrivateMethods)
 - (BOOL)writeChunk;
@@ -16,24 +18,18 @@
 typedef enum {
     MessagePlayerConnected = 0,
     MessageNotInMatch,
+    MessageStartMatch,
+    MessageMatchStarted,
+    MessageMovedSelf,
+    MessagePlayerMoved,
+    MessageGameOver,
+    MessageNotifyReady,
 } MessageType;
 
 @implementation NetworkController
 
-
-@synthesize gameCenterAvailable = _gameCenterAvailable;
-@synthesize userAuthenticated = _userAuthenticated;
-@synthesize delegate = _delegate;
 @synthesize state = _state;
-@synthesize inputStream = _inputStream;
-@synthesize outputStream = _outputStream;
-@synthesize inputOpened = _inputOpened;
-@synthesize outputOpened = _outputOpened;
-@synthesize outputBuffer = _outputBuffer;
-@synthesize okToWrite = _okToWrite;
-@synthesize inputBuffer = _inputBuffer;
-@synthesize presentingViewController = _presentingViewController;
-@synthesize mmvc = _mmvc;
+
 
 #pragma mark - Helpers
 
@@ -60,13 +56,13 @@ static NetworkController *sharedController = nil;
 
 - (void)setState:(NetworkState)state {
     _state = state;
-    if (_delegate) {
-        [_delegate stateChanged:_state];
+    if (self.delegate) {
+        [self.delegate stateChanged:_state];
     }
 }
 
 - (void)dismissMatchmaker {
-    [_presentingViewController dismissModalViewControllerAnimated:YES];
+    [self.presentingViewController dismissModalViewControllerAnimated:YES];
     self.mmvc = nil;
     self.presentingViewController = nil;
 }
@@ -76,8 +72,8 @@ static NetworkController *sharedController = nil;
 - (id)init {
     if ((self = [super init])) {
         [self setState:_state];
-        _gameCenterAvailable = [self isGameCenterAvailable];
-        if (_gameCenterAvailable) {
+        self.gameCenterAvailable = [self isGameCenterAvailable];
+        if (self.gameCenterAvailable) {
             NSNotificationCenter *nc =
             [NSNotificationCenter defaultCenter];
             [nc addObserver:self
@@ -87,6 +83,13 @@ static NetworkController *sharedController = nil;
         }
     }
     return self;
+}
+
+- (void)sendNotifyReady:(NSString *)inviter {
+    MessageWriter * writer = [[MessageWriter alloc] init];
+    [writer writeByte:MessageNotifyReady];
+    [writer writeString:inviter];
+    [self sendData:writer.data];
 }
 
 - (void)processMessage:(NSData *)data {
@@ -99,21 +102,112 @@ static NetworkController *sharedController = nil;
     if (msgType == MessageNotInMatch) {
         NSLog(@"PROCESS: MESSAGENOTINMATCH");
         [self setState:NetworkStateReceivedMatchStatus];
-        [_delegate setNotInMatch];
+        [self.delegate setNotInMatch];
     }
+    else if (msgType == MessageMatchStarted) {
+        
+        [self setState:NetworkStateMatchActive];
+        [self dismissMatchmaker];
+        unsigned char matchState = [reader readByte];
+        NSMutableArray * players = [NSMutableArray array];
+        
+        NSString *turn = [reader readString];
+        
+        if ([turn isEqualToString:[GKLocalPlayer localPlayer].playerID]){
+            
+            CCLOG(@"MY TURN");
+            
+        }
+        else{
+            CCLOG(@"NOT MY TURN");
+        }
+        
+        unsigned char numPlayers = [reader readByte];
+        for(unsigned char i = 0; i < numPlayers; ++i) {
+            NSString *playerId = [reader readString];
+            NSString *alias = [reader readString];
+            int posX = [reader readInt];
+            Player *player = [[Player alloc] initWithPlayerId:playerId alias:alias];
+            [players addObject:player];
+        }
+        
+        int tilesNum = [reader readInt];
+        NSLog(@"Num of tiles: %i",tilesNum);
+        
+        NSMutableArray * tileVals = [NSMutableArray arrayWithCapacity:25];
+        
+        for (int i = 0; i < tilesNum; i++){
+            
+            int tileVal = [reader readInt];
+            [tileVals addObject:[NSNumber numberWithInt:tileVal] ];
+            NSLog(@"Tile: %i",tileVal);
+            
+        }
+        
+        Match * match = [[Match alloc] initWithState:matchState players:players];
+
+        [_delegate matchStarted:match andArr:tileVals];
+        
+    }
+    else if (msgType == MessagePlayerMoved && _state == NetworkStateMatchActive) {
+        
+        unsigned char playerIndex = [reader readByte];
+        
+        
+        Move *move = [Move new];
+        
+        int score = [reader readInt];
+        move.score = score;
+        CCLOG(@"Score: %i",score);
+        
+    
+        int numIndices = [reader readInt];
+        CCLOG(@"num indices: %i",numIndices);
+        for (int i = 0; i < numIndices; i++){
+            int index = [reader readInt];
+            CCLOG(@"%i", index);
+            [move.indices addObject:[NSNumber numberWithInt:index]];
+        }
+        
+        int numTiles = [reader readInt];
+        CCLOG(@"numTiles: %i", numTiles);
+        for (int i = 0; i < numTiles; i++){
+            int val = [reader readInt];
+            CCLOG(@"%i",val);
+            [move.tileVals addObject:[NSNumber numberWithInt:val]];
+
+        }
+        
+        [_delegate player:playerIndex moved:move];
+        
+        
+        
+    } else if (msgType == MessageGameOver && _state == NetworkStateMatchActive) {
+        unsigned char winnerIndex = [reader readByte];
+        [_delegate gameOver:winnerIndex];
+    }
+    else if (msgType == MessageNotifyReady) {
+        NSString *playerId = [reader readString];
+        NSLog(@"Player %@ ready", playerId);
+        if (_mmvc != nil) {
+            //[_mmvc setHostedPlayerReady:playerId];
+            [_mmvc setHostedPlayer:playerId connected:TRUE];
+        }
+    }
+    
 }
 
 #pragma mark - Message sending / receiving
 
 - (void)sendData:(NSData *)data {
     
-    if (_outputBuffer == nil) return;
+    if (self.outputBuffer == nil) return;
     
     int dataLength = data.length;
     dataLength = htonl(dataLength);
-    [_outputBuffer appendBytes:&dataLength length:sizeof(dataLength)];
-    [_outputBuffer appendData:data];
-    if (_okToWrite) {
+    [self.outputBuffer appendBytes:&dataLength length:sizeof(dataLength)];
+    [self.outputBuffer appendData:data];
+    if (self.okToWrite) {
         [self writeChunk];
         NSLog(@"Wrote message");
     } else {
@@ -131,6 +225,59 @@ static NetworkController *sharedController = nil;
     [writer writeByte:continueMatch];
     [self sendData:writer.data];
 }
+- (void)sendStartMatch:(NSArray *)players {
+    [self setState:NetworkStatePendingMatchStart];
+    
+    MessageWriter * writer = [[MessageWriter alloc] init];
+    [writer writeByte:MessageStartMatch];
+    [writer writeByte:players.count];
+    for(NSString *playerId in players) {
+        [writer writeString:playerId];
+    }
+    [self sendData:writer.data];
+}
+
+
+/**
+ 
+ Message: tag, int currScore, int sizeofindicies, indices, int sizeoftileVals, tileVals
+ 
+ **/
+-(void)sendMove:(Move*) move{
+    
+    NSLog(@"SEND MOVE");
+    
+    MessageWriter * writer = [[MessageWriter alloc] init];
+    [writer writeByte:MessageMovedSelf];
+    [writer writeInt:move.score];
+    [writer writeInt:move.indices.count];
+    
+    NSLog(@"INDICES");
+    for (NSNumber * num in move.indices) {
+        NSLog(@"%i",[num intValue]);
+        [writer writeInt:[num intValue]];
+    }
+    
+    [writer writeInt:move.tileVals.count];
+    
+    NSLog(@"TILE VALS");
+    for (NSNumber * num in move.tileVals) {
+        NSLog(@"%i",[num intValue]);
+        [writer writeInt:[num intValue]];
+    }
+    
+    [self sendData:writer.data];
+    NSLog(@"ENDSENDMOVE");
+    
+}
+- (void)sendMovedSelf:(int)posX {
+    
+    MessageWriter * writer = [[MessageWriter alloc] init];
+    [writer writeByte:MessageMovedSelf];
+    [writer writeInt:posX];
+    [self sendData:writer.data];
+    
+}
 
 #pragma mark - Server communication
 
@@ -143,31 +290,36 @@ static NetworkController *sharedController = nil;
     
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
-    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"192.168.2.106", 1955, &readStream, &writeStream);
-    _inputStream = (NSInputStream *)CFBridgingRelease(readStream);
-    _outputStream = (NSOutputStream *)CFBridgingRelease(writeStream);
-    [_inputStream setDelegate:self];
-    [_outputStream setDelegate:self];
-    [_inputStream setProperty:(id)kCFBooleanTrue forKey:(NSString *)kCFStreamPropertyShouldCloseNativeSocket];
-    [_outputStream setProperty:(id)kCFBooleanTrue forKey:(NSString *)kCFStreamPropertyShouldCloseNativeSocket];
-    [_inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [_inputStream open];
-    [_outputStream open];
+    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"192.168.2.107", 1955, &readStream, &writeStream);
+    
+    self.inputStream = (NSInputStream *)CFBridgingRelease(readStream);
+    self.outputStream = (NSOutputStream *)CFBridgingRelease(writeStream);
+    
+    [self.inputStream setDelegate:self];
+    [self.outputStream setDelegate:self];
+    
+    [self.inputStream setProperty:(id)kCFBooleanTrue forKey:(NSString *)kCFStreamPropertyShouldCloseNativeSocket];
+    [self.outputStream setProperty:(id)kCFBooleanTrue forKey:(NSString *)kCFStreamPropertyShouldCloseNativeSocket];
+    
+    [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    
+    [self.inputStream open];
+    [self.outputStream open];
 }
 
 - (void)disconnect {
     
     [self setState:NetworkStateConnectingToServer];
     
-    if (_inputStream != nil) {
+    if (self.inputStream != nil) {
         self.inputStream.delegate = nil;
-        [_inputStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [_inputStream close];
+        [self.inputStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.inputStream close];
         self.inputStream = nil;
         self.inputBuffer = nil;
     }
-    if (_outputStream != nil) {
+    if (self.outputStream != nil) {
         self.outputStream.delegate = nil;
         [self.outputStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [self.outputStream close];
@@ -188,14 +340,15 @@ static NetworkController *sharedController = nil;
     switch (eventCode) {
         case NSStreamEventOpenCompleted: {
             NSLog(@"Opened input stream");
-            _inputOpened = YES;
-            if (_inputOpened && _outputOpened && _state == NetworkStateConnectingToServer) {
+            self.inputOpened = YES;
+            if (self.inputOpened && self.outputOpened && _state == NetworkStateConnectingToServer) {
                 [self setState:NetworkStateConnected];
-                [self sendPlayerConnected:true];
+                BOOL continueMatch = _pendingInvite == nil;
+                [self sendPlayerConnected:continueMatch];
             }
         }
         case NSStreamEventHasBytesAvailable: {
-            if ([_inputStream hasBytesAvailable]) {
+            if ([self.inputStream hasBytesAvailable]) {
                 NSLog(@"Input stream has bytes...");
                 NSInteger       bytesRead;
                 uint8_t         buffer[32768];
@@ -208,7 +361,7 @@ static NetworkController *sharedController = nil;
                     [self reconnect];
                 } else {
                     NSLog(@"Read %d bytes", bytesRead);
-                    [_inputBuffer appendData:[NSData dataWithBytes:buffer length:bytesRead]];
+                    [self.inputBuffer appendData:[NSData dataWithBytes:buffer length:bytesRead]];
                     [self checkForMessages];
                 }
             }
@@ -232,26 +385,26 @@ static NetworkController *sharedController = nil;
 - (void)checkForMessages {
     NSLog(@"CHECK FOR MESSAGES");
     while (true) {
-        if (_inputBuffer.length < sizeof(int)) {
+        if (self.inputBuffer.length < sizeof(int)) {
             return;
         }
         
-        int msgLength = *((int *) _inputBuffer.bytes);
+        int msgLength = *((int *) self.inputBuffer.bytes);
         msgLength = ntohl(msgLength);
-        if (_inputBuffer.length < msgLength) {
+        if (self.inputBuffer.length < msgLength) {
             return;
         }
         
-        NSData * message = [_inputBuffer subdataWithRange:NSMakeRange(4, msgLength)];
+        NSData * message = [self.inputBuffer subdataWithRange:NSMakeRange(4, msgLength)];
         
         [self processMessage:message];
         
-        int amtRemaining = _inputBuffer.length - msgLength - sizeof(int);
+        int amtRemaining = self.inputBuffer.length - msgLength - sizeof(int);
         if (amtRemaining == 0) {
             self.inputBuffer = [[NSMutableData alloc] init] ;
         } else {
             NSLog(@"Creating input buffer of length %d", amtRemaining);
-            self.inputBuffer = [[NSMutableData alloc] initWithBytes:_inputBuffer.bytes+4+msgLength length:amtRemaining] ;
+            self.inputBuffer = [[NSMutableData alloc] initWithBytes:self.inputBuffer.bytes+4+msgLength length:amtRemaining] ;
         }
         
     }
@@ -259,24 +412,24 @@ static NetworkController *sharedController = nil;
 
 - (BOOL)writeChunk {
     
-    long amtToWrite = MIN(_outputBuffer.length, 1024);
+    long amtToWrite = MIN(self.outputBuffer.length, 1024);
     if (amtToWrite == 0) return FALSE;
     
-    NSLog(@"Amt to write: %lu/%lu", amtToWrite, _outputBuffer.length);
+    NSLog(@"Amt to write: %lu/%lu", amtToWrite, self.outputBuffer.length);
     
-    long amtWritten = [self.outputStream write:_outputBuffer.bytes maxLength:amtToWrite];
+    long amtWritten = [self.outputStream write:self.outputBuffer.bytes maxLength:amtToWrite];
     if (amtWritten < 0) {
         [self reconnect];
     }
-    long amtRemaining = _outputBuffer.length - amtWritten;
+    long amtRemaining = self.outputBuffer.length - amtWritten;
     if (amtRemaining == 0) {
         self.outputBuffer = [NSMutableData data];
     } else {
         NSLog(@"Creating output buffer of length %lu", amtRemaining);
-        self.outputBuffer = [NSMutableData dataWithBytes:_outputBuffer.bytes+amtWritten length:amtRemaining];
+        self.outputBuffer = [NSMutableData dataWithBytes:self.outputBuffer.bytes+amtWritten length:amtRemaining];
     }
     NSLog(@"Wrote %lu bytes, %lu remaining.", amtWritten, amtRemaining);
-    _okToWrite = FALSE;
+    self.okToWrite = FALSE;
     return TRUE;
 }
 
@@ -284,10 +437,11 @@ static NetworkController *sharedController = nil;
     switch (eventCode) {
         case NSStreamEventOpenCompleted: {
             NSLog(@"Opened output stream");
-            _outputOpened = YES;
-            if (_inputOpened && _outputOpened && _state == NetworkStateConnectingToServer) {
+            self.outputOpened = YES;
+            if (self.inputOpened && self.outputOpened && _state == NetworkStateConnectingToServer) {
                 [self setState:NetworkStateConnected];
-                [self sendPlayerConnected:true];
+                BOOL continueMatch = _pendingInvite == nil;
+                [self sendPlayerConnected:continueMatch];
             }
         } break;
         case NSStreamEventHasBytesAvailable: {
@@ -297,7 +451,7 @@ static NetworkController *sharedController = nil;
             NSLog(@"Ok to send");
             BOOL wroteChunk = [self writeChunk];
             if (!wroteChunk) {
-                _okToWrite = TRUE;
+                self.okToWrite = TRUE;
             }
         } break;
         case NSStreamEventErrorOccurred: {
@@ -315,9 +469,9 @@ static NetworkController *sharedController = nil;
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        if (aStream == _inputStream) {
+        if (aStream == self.inputStream) {
             [self inputStreamHandleEvent:eventCode];
-        } else if (aStream == _outputStream) {
+        } else if (aStream == self.outputStream) {
             [self outputStreamHandleEvent:eventCode];
         }
     });
@@ -327,14 +481,25 @@ static NetworkController *sharedController = nil;
 
 - (void)authenticationChanged {
     
-    if ([GKLocalPlayer localPlayer].isAuthenticated && !_userAuthenticated) {
+    if ([GKLocalPlayer localPlayer].isAuthenticated && !self.userAuthenticated) {
         NSLog(@"Authentication changed: player authenticated.");
         [self setState:NetworkStateAuthenticated];
-        _userAuthenticated = TRUE;
+        self.userAuthenticated = TRUE;
+        [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
+            NSLog(@"Received invite");
+            self.pendingInvite = acceptedInvite;
+            self.pendingPlayersToInvite = playersToInvite;
+            
+            if (_state >= NetworkStateConnected) {
+                [self setState:NetworkStateReceivedMatchStatus];
+                [_delegate setNotInMatch];
+            }
+            
+        };
         [self connect];
-    } else if (![GKLocalPlayer localPlayer].isAuthenticated && _userAuthenticated) {
+    } else if (![GKLocalPlayer localPlayer].isAuthenticated && self.userAuthenticated) {
         NSLog(@"Authentication changed: player not authenticated");
-        _userAuthenticated = FALSE;
+        self.userAuthenticated = FALSE;
         [self setState:NetworkStateNotAvailable];
         [self disconnect];
     }
@@ -343,7 +508,7 @@ static NetworkController *sharedController = nil;
 
 - (void)authenticateLocalUser {
     
-    if (!_gameCenterAvailable) return;
+    if (!self.gameCenterAvailable) return;
     
     NSLog(@"Authenticating local user...");
     if ([GKLocalPlayer localPlayer].authenticated == NO) {
@@ -360,16 +525,24 @@ static NetworkController *sharedController = nil;
 - (void)findMatchWithMinPlayers:(int)minPlayers maxPlayers:(int)maxPlayers
                  viewController:(UIViewController *)viewController {
     
-    if (!_gameCenterAvailable) return;
+    if (!self.gameCenterAvailable) return;
     
     [self setState:NetworkStatePendingMatch];
     
     self.presentingViewController = viewController;
-    [_presentingViewController dismissModalViewControllerAnimated:NO];
+    [self.presentingViewController dismissModalViewControllerAnimated:NO];
     
-    if (FALSE) {
+    if (_pendingInvite != nil) {
         
-        // TODO: Will add code here later!
+        [self sendNotifyReady:_pendingInvite.inviter];
+        
+        self.mmvc = [[GKMatchmakerViewController alloc] initWithInvite:_pendingInvite] ;
+        _mmvc.hosted = YES;
+        _mmvc.matchmakerDelegate = self;
+        
+        [_presentingViewController presentModalViewController:_mmvc animated:YES];
+        self.pendingInvite = nil;
+        self.pendingPlayersToInvite = nil;
         
     } else {
         GKMatchRequest *request = [[GKMatchRequest alloc] init];
@@ -377,10 +550,10 @@ static NetworkController *sharedController = nil;
         request.maxPlayers = maxPlayers;
         
         self.mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
-        _mmvc.hosted = YES;
-        _mmvc.matchmakerDelegate = self;
+        self.mmvc.hosted = YES;
+        self.mmvc.matchmakerDelegate = self;
         
-        [_presentingViewController presentModalViewController:_mmvc animated:YES];
+        [self.presentingViewController presentModalViewController:self.mmvc animated:YES];
     }
 }
 
@@ -402,13 +575,17 @@ static NetworkController *sharedController = nil;
     NSLog(@"didFindPlayers");
     NSLog(@"Local ID %@",[[GKLocalPlayer localPlayer] playerID]);
     
-    for (NSString *playerID in playerIDs) {
+    NSMutableArray * arr = [playerIDs mutableCopy];
+    [arr addObject:[[GKLocalPlayer localPlayer] playerID]];
+    
+    for (NSString *playerID in arr) {
         NSLog(@"%@", playerID);
     }
     if (_state == NetworkStatePendingMatch) {
         [self dismissMatchmaker];
-        // TODO: Send message to server to start match, with given player Ids
+        [self sendStartMatch:arr];
     }
+    
 }
 
 // An invited player has accepted a hosted invite.  Apps should connect through the hosting server and then update the player's connected state (using setConnected:forHostedPlayer:)
